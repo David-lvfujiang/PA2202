@@ -1,0 +1,49 @@
+apply plugin: 'com.android.application'
+
+android {
+    compileSdkVersion BUILD_VERSIONS.COMPILE_SDK
+    buildToolsVersion BUILD_VERSIONS.BUILD_TOOLS
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+    defaultConfig {
+        applicationId "com.fenda.onn"
+        minSdkVersion BUILD_VERSIONS.MIN_SDK
+        targetSdkVersion BUILD_VERSIONS.TARGET_SDK
+        versionCode BUILD_VERSIONS.VERSION_CODE
+        versionName BUILD_VERSIONS.VERSION_NAME
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+    }
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+    }
+}
+
+dependencies {
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
+    api deps.support.appcompat
+    api deps.support.constraintlayout
+    api deps.support.annotation
+    api deps.support.recyclerview
+    api deps.glide
+    //retrofit
+    api deps.retrofit.runtime
+    api deps.retrofit.adapter
+    api deps.retrofit.gson
+    api deps.retrofit.logging
+    //rx
+    api deps.rxrelay2
+    api deps.rxjava2
+    api deps.rx_android
+    api deps.rxlifecycle
+    testImplementation deps.junit
+    androidTestImplementation deps.test_espresso_core
+    //ButterKnife
+    api deps.butterknife
+    annotationProcessor deps.butterknife_compiler
+    api deps.adapter_helper
+}

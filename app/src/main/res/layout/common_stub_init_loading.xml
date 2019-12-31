@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.fenda.onn.common.view.LoadingInitView
+    android:id="@+id/view_init_loading"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@mipmap/loading_bg"
+    xmlns:android="http://schemas.android.com/apk/res/android"/>

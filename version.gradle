@@ -1,0 +1,78 @@
+ext.deps = [:]
+
+
+def versions = [:]
+versions.android_gradle_plugin = "3.4.0"
+
+versions.appcompat = "1.1.0"
+versions.constraint = "1.1.3"
+versions.annotation = "1.1.0"
+versions.recyclerview = "1.1.0"
+versions.rxrelay2 = "2.1.1"
+versions.rxjava2 = "2.1.12"
+versions.rx_android = "2.0.2"
+versions.retrofit = "2.4.0"
+versions.logging_interceptor = "3.6.0"
+versions.rxlifecycle = "2.2.2"
+versions.butterknife = "10.0.0"
+//test
+versions.junit = "4.12"
+versions.test_espresso_core = "3.2.0"
+versions.glide = "4.2.0"
+versions.adapter_helper = "2.9.22"
+def deps = [:]
+
+def support = [:]
+
+support.appcompat = "androidx.appcompat:appcompat:$versions.appcompat"
+support.constraintlayout = "androidx.constraintlayout:constraintlayout:$versions.constraint"
+support.annotation = "androidx.annotation:annotation:$versions.annotation"
+support.recyclerview = "androidx.recyclerview:recyclerview:$versions.recyclerview"
+deps.support = support
+
+def retrofit = [:]
+retrofit.runtime = "com.squareup.retrofit2:retrofit:$versions.retrofit"
+retrofit.adapter = "com.squareup.retrofit2:adapter-rxjava2:$versions.retrofit"
+retrofit.gson = "com.squareup.retrofit2:converter-gson:$versions.retrofit"
+retrofit.logging = "com.squareup.okhttp3:logging-interceptor:$versions.logging_interceptor"
+deps.retrofit = retrofit
+
+
+deps.android_gradle_plugin = "com.android.tools.build:gradle:$versions.android_gradle_plugin"
+//rx
+deps.rxrelay2 = "com.jakewharton.rxrelay2:rxrelay:$versions.rxrelay2"
+deps.rxjava2 = "io.reactivex.rxjava2:rxjava:$versions.rxjava2"
+deps.rx_android = "io.reactivex.rxjava2:rxandroid:$versions.rx_android"
+deps.rxlifecycle = "com.trello.rxlifecycle2:rxlifecycle-android-lifecycle:$versions.rxlifecycle"
+
+deps.butterknife = "com.jakewharton:butterknife:$versions.butterknife"
+deps.butterknife_compiler = "com.jakewharton:butterknife-compiler:$versions.butterknife"
+deps.junit = "junit:junit:$versions.junit"
+deps.test_espresso_core = "androidx.test.espresso:espresso-core:$versions.test_espresso_core"
+//glide
+deps.glide = "com.github.bumptech.glide:glide:$versions.glide"
+//通用适配器依赖
+deps.adapter_helper="com.github.CymChad:BaseRecyclerViewAdapterHelper:$versions.adapter_helper"
+ext.deps = deps
+def BUILD_VERSIONS = [:]
+BUILD_VERSIONS.MIN_SDK = 21
+BUILD_VERSIONS.TARGET_SDK = 28
+BUILD_VERSIONS.COMPILE_SDK = 28
+BUILD_VERSIONS.BUILD_TOOLS = "29.0.1"
+BUILD_VERSIONS.VERSION_CODE = 1
+BUILD_VERSIONS.VERSION_NAME = "1.0.1"
+
+ext.BUILD_VERSIONS = BUILD_VERSIONS
+
+
+def addRepos(RepositoryHandler handler) {
+    handler.google()
+    handler.jcenter()
+    handler.mavenCentral()
+    //Add the JitPack repository
+    handler.maven { url "https://jitpack.io" }
+
+}
+
+ext.addRepos = this.&addRepos
+

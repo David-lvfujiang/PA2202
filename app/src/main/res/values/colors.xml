@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#008577</color>
+    <color name="colorPrimaryDark">#00574b</color>
+    <color name="colorAccent">#d81b60</color>
+    <color name="fd_text_fcfcff">#fcfcff</color>
+    <color name="fd_text_black">#000000</color>
+    <color name="fd_text_white">#ffffff</color>
+    <color name="fd_text_3c88d4">#3c88d4</color>
+    <color name="fd_bg_f2f2f2">#f2f2f2</color>
+    <color name="fd_bg_f6f6f6">#f6f6f6</color>
+    <color name="fd_bg_666666">#666666</color>
+    <color name="fd_bg_257dd5">#257dd5</color>
+
+</resources>

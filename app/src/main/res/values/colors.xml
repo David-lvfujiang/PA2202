@@ -11,5 +11,15 @@
     <color name="fd_bg_f6f6f6">#f6f6f6</color>
     <color name="fd_bg_666666">#666666</color>
     <color name="fd_bg_257dd5">#257dd5</color>
-
+    <color name="fd_bg_F6F6F6">#F6F6F6</color>
+    <color name="fd_bg_3C88D4">#3C88D4</color>
+    <color name="fd_bg_8F8F8F">#8F8F8F</color>
+    <color name="fd_bg_a0e057">#a0e057</color>
+    <color name="fd_bg_88fef5">#88fef5</color>
+    <color name="fd_bg_3fc9fa">#3fc9fa</color>
+    <color name="fd_bg_a0a9fe">#a0a9fe</color>
+    <color name="fd_bg_e8b7fe">#e8b7fe</color>
+    <color name="fd_bg_f7603b">#f7603b</color>
+    <color name="fd_bg_fea928">#fea928</color>
+    <color name="fd_bg_d1f0fe">#d1f0fe</color>
 </resources>

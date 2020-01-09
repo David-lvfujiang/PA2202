@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@drawable/tws_center_dialog_shape">
+
+    <TextView
+        android:id="@+id/tv_add_device_remark"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:gravity="center"
+        android:text="@string/add_device_remark"
+        android:textColor="@color/fd_text_black"
+        android:textSize="@dimen/textsize_sp22"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <Button
+        android:id="@+id/rb_cancel"
+        android:layout_width="@dimen/demension_dp100"
+        android:layout_height="@dimen/demension_dp50"
+        android:layout_marginTop="24dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginBottom="16dp"
+        android:layout_weight="1"
+        android:background="@drawable/bt_about_shape"
+        android:gravity="center"
+        android:text="@string/cancel"
+        android:textColor="@color/fd_text_white"
+        android:textSize="@dimen/textsize_sp18"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.852"
+        app:layout_constraintStart_toStartOf="@+id/rb_confirm"
+        app:layout_constraintTop_toBottomOf="@+id/clearWriteEditText"></Button>
+
+    <Button
+        android:id="@+id/rb_confirm"
+        android:layout_width="@dimen/demension_dp100"
+        android:layout_height="@dimen/demension_dp50"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="24dp"
+        android:layout_marginBottom="16dp"
+        android:layout_weight="1"
+        android:background="@drawable/bt_about_shape"
+        android:gravity="center"
+        android:text="@string/confirm"
+        android:textColor="@color/fd_text_white"
+        android:textSize="@dimen/textsize_sp18"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.15"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/clearWriteEditText"></Button>
+
+    <com.fenda.onn.ui.view.ClearWriteEditText
+        android:id="@+id/clearWriteEditText"
+        android:layout_width="286dp"
+        android:layout_height="62dp"
+        android:layout_marginStart="80dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="80dp"
+        android:gravity="center_vertical"
+        android:hint="@string/edit_hint"
+        android:maxLength="6"
+        android:textCursorDrawable="@drawable/cursor_color"
+        android:textSize="@dimen/textsize_sp18"
+        android:theme="@style/Edit_Underline_color"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView4">
+
+    </com.fenda.onn.ui.view.ClearWriteEditText>
+
+    <TextView
+        android:id="@+id/textView4"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="8dp"
+        android:text="@string/add_device_prompt"
+        android:textSize="@dimen/textsize_sp18"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tv_add_device_remark" />
+</androidx.constraintlayout.widget.ConstraintLayout>

@@ -39,8 +39,8 @@ public abstract class BaseFragment extends Fragment {
     private ViewStub mViewNoData;
     private ViewStub mViewError;
 
-    private boolean isViewCreated = false;
-    private boolean isViewVisable = false;
+    protected boolean isViewCreated = false;
+    protected boolean isViewVisable = false;
     protected Context mContext;
     private Unbinder mUnBinder;
 

@@ -1,0 +1,179 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ui.activity.FmRadioActivity">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/ivHead"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/demension_dp80"
+        android:layout_marginBottom="397dp"
+        android:background="@color/fd_text_3c88d4"
+        app:layout_constraintBottom_toTopOf="@+id/radioGroup"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.0">
+
+        <ImageView
+            android:id="@+id/ivBack"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="19dp"
+            android:fitsSystemWindows="true"
+            android:src="@mipmap/icon_back_white"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.509" />
+
+        <TextView
+            android:id="@+id/tvTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:text="@string/fm_radio"
+            android:textColor="@color/fd_text_white"
+            android:textSize="@dimen/textsize_sp18"
+            app:layout_constraintBottom_toBottomOf="@+id/ivBack"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+    <Button
+        android:id="@+id/bt_fm_icon_next"
+        android:layout_width="@dimen/demension_dp20"
+        android:layout_height="@dimen/demension_dp36"
+        android:layout_marginEnd="16dp"
+        android:background="@mipmap/icon_next"
+        app:layout_constraintBottom_toBottomOf="@+id/tv_fm_rate"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/tv_fm_rate" />
+
+    <Button
+        android:id="@+id/bt_fm_icon_prev"
+        android:layout_width="@dimen/demension_dp20"
+        android:layout_height="@dimen/demension_dp36"
+        android:layout_marginStart="24dp"
+        android:background="@mipmap/icon_prev"
+        app:layout_constraintBottom_toBottomOf="@+id/tv_fm_rate"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/tv_fm_rate" />
+
+    <com.fenda.onn.ui.view.RulerView
+        android:id="@+id/fm_ruler_view"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="60dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/ivHead"></com.fenda.onn.ui.view.RulerView>
+
+    <RadioGroup
+        android:id="@+id/radioGroup"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="140dp"
+        android:orientation="horizontal"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <RadioButton
+            android:id="@+id/rb_search"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="36dp"
+            android:layout_weight="1"
+            android:button="@null"
+            android:checked="true"
+            android:drawableLeft="@drawable/fm_radio_search_select"
+            android:drawablePadding="@dimen/demension_dp8"
+            android:text="@string/rb_search"
+            android:textColor="@color/fd_text_3c88d4"
+            android:textSize="@dimen/demension_dp18"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_goneMarginLeft="@dimen/demension_dp18"></RadioButton>
+
+        <RadioButton
+            android:id="@+id/rb_collct"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="36dp"
+            android:alpha="0.5"
+            android:button="@null"
+            android:drawableLeft="@drawable/fm_radio_collct_select"
+            android:drawablePadding="@dimen/demension_dp8"
+            android:text="@string/rb_collct"
+            android:textColor="@color/fd_text_3c88d4"
+            android:textSize="@dimen/demension_dp18"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_goneMarginLeft="@dimen/demension_dp18"></RadioButton>
+
+    </RadioGroup>
+
+    <FrameLayout
+        android:id="@+id/fl_Content"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/radioGroup">
+
+        <fragment
+            android:id="@+id/fm_collect_list_ragment"
+            android:name="com.fenda.onn.ui.fragment.FmCollectListFragment"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+        <fragment
+            android:id="@+id/fm_search_list_ragment"
+            android:name="com.fenda.onn.ui.fragment.FmSearchListFragment"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
+    </FrameLayout>
+
+    <TextView
+        android:id="@+id/textView2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="32dp"
+        android:text="@string/Listening"
+        android:textColor="@color/fd_text_black"
+        android:textSize="@dimen/textsize_sp18"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/ivHead" />
+
+    <TextView
+        android:id="@+id/tv_fm_rate"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="32dp"
+        android:text="99.5"
+        android:textColor="@color/fd_text_black"
+        android:textSize="@dimen/demension_dp48"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView2" />
+
+    <TextView
+        android:id="@+id/textView7"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:text="@string/fm_mhz"
+        android:textColor="@color/fd_text_black"
+        android:textSize="@dimen/textsize_sp18"
+        app:layout_constraintBaseline_toBaselineOf="@+id/tv_fm_rate"
+        app:layout_constraintStart_toEndOf="@+id/tv_fm_rate" />
+</androidx.constraintlayout.widget.ConstraintLayout>

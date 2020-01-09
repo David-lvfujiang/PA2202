@@ -1,6 +1,12 @@
 package com.fenda.onn.ui.activity;
 
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
+import android.view.Gravity;
+import android.view.View;
+import android.view.WindowManager;
 import android.widget.CompoundButton;
+import android.widget.PopupWindow;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.TextView;
@@ -27,7 +33,6 @@ import butterknife.OnCheckedChanged;
  * desc  产品系列界面
  */
 public class ProductionSeriesActivity extends BaseActivity {
-
     @BindView(R.id.tvTitle)
     TextView tvTitle;
     @BindView(R.id.rbSound)
@@ -47,7 +52,6 @@ public class ProductionSeriesActivity extends BaseActivity {
 
     @Override
     public void initView() {
-
     }
 
     @Override
@@ -65,8 +69,6 @@ public class ProductionSeriesActivity extends BaseActivity {
         FragmentManager manger = getSupportFragmentManager();
         vpContent.setAdapter(new ProductionSeriesPagerAdapter(manger, mFragmentList));
     }
-
-
 
     /**
      * 产品系列选择事件
@@ -91,5 +93,4 @@ public class ProductionSeriesActivity extends BaseActivity {
                 break;
         }
     }
-
 }

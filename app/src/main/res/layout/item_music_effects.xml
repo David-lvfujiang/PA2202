@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+    <Button
+        android:id="@+id/item_bt_miusic_effects"
+        android:layout_width="@dimen/demension_dp120"
+        android:layout_height="@dimen/demension_dp60"
+        android:background="@mipmap/pic__alien"
+        android:textColor="@color/fd_text_white"
+        android:layout_marginTop="@dimen/demension_dp20"
+      ></Button>
+</RelativeLayout>

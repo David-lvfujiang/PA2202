@@ -4,6 +4,8 @@ import android.app.Activity;
 import android.app.Application;
 import android.content.Context;
 
+import org.litepal.LitePalApplication;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -12,7 +14,7 @@ import java.util.List;
  * @time 2019/12/26 15:21
  * desc  应用入口
  */
-public class AppApplication extends Application {
+public class AppApplication extends LitePalApplication {
     private static Context mContext;
     public static List<Activity> mActivitys = new ArrayList<Activity>();
 

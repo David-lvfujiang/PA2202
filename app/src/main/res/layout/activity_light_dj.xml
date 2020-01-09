@@ -1,0 +1,343 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.drawerlayout.widget.DrawerLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/drawerLayout"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ui.activity.LightDjActivity">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <ImageView
+            android:id="@+id/ivHead"
+            android:layout_width="0dp"
+            android:layout_height="@dimen/demension_dp80"
+            android:background="@color/fd_text_3c88d4"
+            android:scaleType="fitXY"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <ImageView
+            android:id="@+id/ivBack"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="19dp"
+            android:fitsSystemWindows="true"
+            android:src="@mipmap/icon_back_white"
+            app:layout_constraintBottom_toBottomOf="@+id/ivHelp"
+            app:layout_constraintStart_toStartOf="@+id/ivHead"
+            app:layout_constraintTop_toTopOf="@+id/ivHelp"
+            app:layout_constraintVertical_bias="1.0" />
+
+        <TextView
+            android:id="@+id/tvTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:text="@string/light_dj"
+            android:textColor="@color/fd_text_white"
+            android:textSize="@dimen/textsize_sp18"
+            app:layout_constraintBottom_toBottomOf="@+id/ivBack"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
+
+        <ImageView
+            android:id="@+id/ivHelp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="48dp"
+            android:layout_marginEnd="16dp"
+            android:layout_marginBottom="17dp"
+            android:src="@mipmap/icon_help"
+            app:layout_constraintBottom_toBottomOf="@+id/ivHead"
+            app:layout_constraintEnd_toEndOf="@+id/ivHead"
+            app:layout_constraintTop_toTopOf="@+id/ivHead"
+            app:layout_constraintVertical_bias="0.714" />
+
+        <com.fenda.onn.ui.view.ShapeView
+            android:id="@+id/img_pic_disk"
+            android:layout_width="@dimen/demension_dp270"
+            android:layout_height="@dimen/demension_dp270"
+            android:layout_marginStart="1dp"
+            android:layout_marginTop="@dimen/demension_dp100"
+            android:background="@mipmap/pic_blue"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.497"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+           />
+
+        <com.fenda.onn.ui.view.ShapeView
+            android:id="@+id/img_pic_palette"
+            android:layout_width="@dimen/demension_dp270"
+            android:layout_height="@dimen/demension_dp270"
+            android:layout_marginTop="@dimen/demension_dp100"
+            android:background="@mipmap/pic_palette"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.497"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            />
+
+        <ImageView
+            android:id="@+id/img_pic_click"
+            android:layout_width="@dimen/demension_dp130"
+            android:layout_height="@dimen/demension_dp130"
+            android:layout_marginTop="90dp"
+            android:src="@mipmap/pic_click"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/ivHead" />
+
+        <TextView
+            android:id="@+id/textView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="24dp"
+            android:layout_marginTop="24dp"
+            android:text="@string/my_miusic_library"
+            android:textColor="@color/fd_text_black"
+            android:textSize="18sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/img_adjust_color"></TextView>
+
+        <ImageView
+            android:id="@+id/img_miusic_library"
+            android:layout_width="@dimen/demension_dp60"
+            android:layout_height="@dimen/demension_dp60"
+            android:layout_marginStart="270dp"
+            android:src="@mipmap/icon_music"
+            app:layout_constraintBottom_toBottomOf="@+id/textView"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="@+id/textView"
+            app:layout_constraintTop_toTopOf="@+id/textView"
+            app:layout_constraintVertical_bias="0.615"></ImageView>
+
+        <Button
+            android:id="@+id/img_adjust_color"
+            android:layout_width="@dimen/dp_40"
+            android:layout_height="@dimen/dp_40"
+            android:layout_marginTop="32dp"
+            android:background="@mipmap/icon_adjust_color"
+            android:textColor="@color/fd_text_white"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.14"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/img_pic_click"></Button>
+
+        <Button
+            android:id="@+id/bt_miusic_alarm"
+            android:layout_width="@dimen/demension_dp110"
+            android:layout_height="@dimen/demension_dp60"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="24dp"
+            android:background="@mipmap/pic_alarm"
+            android:text="@string/miusic_library_style_alarm"
+            android:textColor="@color/fd_text_white"
+            app:layout_constraintEnd_toStartOf="@+id/bt_miusic_alien"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintHorizontal_chainStyle="spread_inside"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textView"></Button>
+
+        <Button
+            android:id="@+id/bt_miusic_alien"
+            android:layout_width="@dimen/demension_dp110"
+            android:layout_height="@dimen/demension_dp60"
+            android:background="@mipmap/pic_alien"
+            android:text="@string/miusic_library_style_alien"
+            android:textColor="@color/fd_text_white"
+            app:layout_constraintBottom_toBottomOf="@+id/bt_miusic_alarm"
+            app:layout_constraintEnd_toStartOf="@+id/bt_miusic_hit"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toEndOf="@+id/bt_miusic_alarm"
+            app:layout_constraintTop_toTopOf="@+id/bt_miusic_alarm"></Button>
+
+        <Button
+            android:id="@+id/bt_miusic_hit"
+            android:layout_width="@dimen/demension_dp110"
+            android:layout_height="@dimen/demension_dp60"
+            android:layout_marginEnd="16dp"
+            android:background="@mipmap/pic_hit"
+            android:text="@string/miusic_library_style_hit"
+            android:textColor="@color/fd_text_white"
+            app:layout_constraintBottom_toBottomOf="@+id/bt_miusic_alien"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toEndOf="@+id/bt_miusic_alien"
+            app:layout_constraintTop_toTopOf="@+id/bt_miusic_alien"></Button>
+
+        <Button
+            android:id="@+id/bt_miusic_kick"
+            android:layout_width="@dimen/demension_dp110"
+            android:layout_height="@dimen/demension_dp60"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="16dp"
+            android:background="@mipmap/pic_alien"
+            android:text="@string/miusic_library_style_kick"
+            android:textColor="@color/fd_text_white"
+            app:layout_constraintEnd_toStartOf="@+id/bt_miusic_radio"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintHorizontal_chainStyle="spread_inside"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/bt_miusic_alarm"></Button>
+
+        <Button
+            android:id="@+id/bt_miusic_radio"
+            android:layout_width="@dimen/demension_dp110"
+            android:layout_height="@dimen/demension_dp60"
+            android:background="@mipmap/pic_hit"
+            android:text="@string/miusic_library_style_radio"
+            android:textColor="@color/fd_text_white"
+            app:layout_constraintBottom_toBottomOf="@+id/bt_miusic_kick"
+            app:layout_constraintEnd_toStartOf="@+id/bt_miusic_rewind"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toEndOf="@+id/bt_miusic_kick"
+            app:layout_constraintTop_toTopOf="@+id/bt_miusic_kick"></Button>
+
+        <Button
+            android:id="@+id/bt_miusic_rewind"
+            android:layout_width="@dimen/demension_dp110"
+            android:layout_height="@dimen/demension_dp60"
+            android:layout_marginEnd="16dp"
+            android:background="@mipmap/pic_rewind"
+            android:text="@string/miusic_library_style_rewind"
+            android:textColor="@color/fd_text_white"
+            app:layout_constraintBottom_toBottomOf="@+id/bt_miusic_radio"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toEndOf="@+id/bt_miusic_radio"
+            app:layout_constraintTop_toTopOf="@+id/bt_miusic_radio"></Button>
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/cl_guide_layout"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:visibility="gone">
+
+            <View
+                android:id="@+id/guide_view"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:alpha="0.5"
+                android:background="@color/fd_text_black"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"></View>
+
+            <Button
+                android:id="@+id/bt_guide_close"
+                android:layout_width="@dimen/demension_dp30"
+                android:layout_height="@dimen/demension_dp30"
+                android:layout_marginTop="40dp"
+                android:layout_marginEnd="16dp"
+                android:background="@mipmap/icon_guide_cancel"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent"></Button>
+
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="52dp"
+                android:layout_marginLeft="@dimen/dp_10"
+                android:layout_marginTop="104dp"
+                android:layout_marginRight="@dimen/dp_10"
+                android:background="@mipmap/pic_dialog1"
+                android:gravity="center"
+                android:text="@string/scroll_light"
+                android:textSize="18sp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"></Button>
+
+            <Button
+                android:id="@+id/button3"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="176dp"
+                android:layout_marginEnd="96dp"
+                android:background="@mipmap/pic_dialog2"
+                android:gravity="center"
+                android:text="@string/click_flash"
+                android:textSize="18sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent"></Button>
+
+            <Button
+                android:id="@+id/button2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="284dp"
+                android:background="@mipmap/pic_dialog3"
+                android:gravity="center"
+                android:text="@string/select_light_color"
+                android:textSize="18sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.304"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"></Button>
+
+            <Button
+                android:id="@+id/button4"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="116dp"
+                android:layout_marginEnd="48dp"
+                android:background="@mipmap/pic_dialog5"
+                android:gravity="center"
+                android:text="@string/open_music_effect_library"
+                android:textSize="18sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/button3"></Button>
+
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="144dp"
+                android:background="@mipmap/pic_dialog5"
+                android:gravity="center"
+                android:text="@string/click_music_effect"
+                android:textSize="18sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/button4"></Button>
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <Button
+            android:id="@+id/bt_light_model"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/demension_dp80"
+            android:background="@mipmap/iocn_light_model"
+            android:gravity="bottom|center"
+            android:paddingBottom="@dimen/textsize_sp15"
+            android:text="Light Mode"
+            android:textColor="@color/fd_text_white"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <RelativeLayout
+        android:layout_width="@dimen/demension_dp150"
+        android:layout_height="match_parent"
+        android:layout_gravity="right"
+        android:alpha="0.8"
+        android:background="@color/fd_text_black">
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/drawer_right_recycle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="@dimen/demension_dp25"
+            android:layout_marginRight="@dimen/demension_dp5"
+            tools:ignore="MissingConstraints"></androidx.recyclerview.widget.RecyclerView>
+    </RelativeLayout>
+
+</androidx.drawerlayout.widget.DrawerLayout>

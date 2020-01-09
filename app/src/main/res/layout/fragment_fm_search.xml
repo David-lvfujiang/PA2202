@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="@color/fd_text_white"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+        android:id="@+id/sr_layout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <RelativeLayout
+            android:id="@+id/rl_more_layout"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <TextView
+                android:visibility="gone"
+                android:id="@+id/tv_search"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:text="下拉自动搜台"
+                android:alpha="0.5"
+                android:textSize="@dimen/textsize_sp12"></TextView>
+
+            <ImageView
+                android:visibility="gone"
+                android:layout_width="@dimen/demension_dp80"
+                android:layout_height="@dimen/demension_dp15"
+                android:layout_below="@+id/tv_search"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="@dimen/demension_dp10"
+                android:src="@mipmap/icon_drop" />
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/rv_fm_search"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                ></androidx.recyclerview.widget.RecyclerView>
+
+        </RelativeLayout>
+
+    </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

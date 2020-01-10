@@ -72,7 +72,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/ivHead"></com.fenda.onn.ui.view.RulerView>
+        app:layout_constraintTop_toBottomOf="@+id/ivHead"/>
 
     <RadioGroup
         android:id="@+id/radioGroup"
@@ -100,7 +100,7 @@
             android:textSize="@dimen/demension_dp18"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_goneMarginLeft="@dimen/demension_dp18"></RadioButton>
+            app:layout_goneMarginLeft="@dimen/demension_dp18"/>
 
         <RadioButton
             android:id="@+id/rb_collct"
@@ -116,20 +116,19 @@
             android:textSize="@dimen/demension_dp18"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_goneMarginLeft="@dimen/demension_dp18"></RadioButton>
+            app:layout_goneMarginLeft="@dimen/demension_dp18"/>
 
     </RadioGroup>
 
-    <com.fenda.onn.ui.view.NoScrollViewPager
+    <FrameLayout
         android:id="@+id/fl_Content"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="0dp"
         android:layout_marginTop="16dp"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/radioGroup">
-
-    </com.fenda.onn.ui.view.NoScrollViewPager>
+        app:layout_constraintTop_toBottomOf="@+id/radioGroup"></FrameLayout>
 
     <TextView
         android:id="@+id/textView2"

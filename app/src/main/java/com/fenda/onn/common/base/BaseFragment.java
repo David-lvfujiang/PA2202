@@ -22,10 +22,10 @@ import butterknife.Unbinder;
 
 
 /**
-*@author kevin.wangzhiqiang
-*@time 2019/12/26 15:13
-*desc 基类Fragment
-*/
+ * @author kevin.wangzhiqiang
+ * @time 2019/12/26
+ * desc 基类Fragment
+ */
 public abstract class BaseFragment extends Fragment {
 
     protected View mRootView;
@@ -74,9 +74,11 @@ public abstract class BaseFragment extends Fragment {
         mViewContent.setLayoutResource(onBindLayout());
         mViewContent.inflate();
     }
+
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
+        isViewCreated = true;
     }
 
     @Override

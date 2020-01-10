@@ -207,7 +207,7 @@ public class MainActivity extends BaseMvpActivity implements View.OnClickListene
         getWindowManager().getDefaultDisplay().getMetrics(outMetrics);
         int widthPixels = outMetrics.widthPixels;
         int heightPixels = outMetrics.heightPixels;
-        Log.e("TAG", "widthPixels = " + widthPixels + ",heightPixels = " + heightPixels);
+        LogUtils.e("TAG", "widthPixels = " + widthPixels + ",heightPixels = " + heightPixels);
         mPopupWindow = new PopupWindow(view, (int) (widthPixels * 0.8), -2, true);
         mPopupWindow.setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
         mPopupWindow.setOutsideTouchable(isFocus);

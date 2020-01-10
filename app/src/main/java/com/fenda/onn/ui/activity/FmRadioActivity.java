@@ -18,16 +18,10 @@ import androidx.fragment.app.FragmentTransaction;
 
 import com.fenda.onn.R;
 import com.fenda.onn.common.base.BaseActivity;
-import com.fenda.onn.common.base.BaseFragment;
-import com.fenda.onn.ui.adapter.ProductionSeriesPagerAdapter;
 import com.fenda.onn.ui.fragment.FmCollectListFragment;
 import com.fenda.onn.ui.fragment.FmSearchListFragment;
-import com.fenda.onn.ui.view.NoScrollViewPager;
 import com.fenda.onn.ui.view.RulerView;
 import com.fenda.onn.utils.ToastUtils;
-
-import java.util.ArrayList;
-import java.util.List;
 
 import butterknife.BindView;
 import butterknife.OnCheckedChanged;
@@ -54,8 +48,7 @@ public class FmRadioActivity extends BaseActivity implements RulerView.FmRateUpd
     @BindView(R.id.rb_collct)
     RadioButton mRbCollect;
     @BindView(R.id.fl_Content)
-    NoScrollViewPager mFmViewPager;
-    private List<BaseFragment> mFragmentList = new ArrayList<>();
+    FrameLayout mFrameLayout;
     FmSearchListFragment mFmSearchListFragment;
     FmCollectListFragment mFmCollectListFragment;
 
@@ -69,17 +62,15 @@ public class FmRadioActivity extends BaseActivity implements RulerView.FmRateUpd
     public void initView() {
         //刻度尺滑动监听
         mRulerView.setFmRateUpdateListener(this);
-        mFmSearchListFragment = new FmSearchListFragment();
-        mFmCollectListFragment = new FmCollectListFragment();
-        mFragmentList.add(mFmSearchListFragment);
-        mFragmentList.add(mFmCollectListFragment);
-        FragmentManager manger = getSupportFragmentManager();
-        mFmViewPager.setAdapter(new ProductionSeriesPagerAdapter(manger, mFragmentList));
     }
 
     @Override
     protected void initData() {
         super.initData();
+        mFmSearchListFragment = new FmSearchListFragment();
+        FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
+        ft.add(R.id.fl_Content, mFmSearchListFragment, "mFmSearchListFragment");
+        ft.commit();
     }
 
     @RequiresApi(api = Build.VERSION_CODES.M)
@@ -138,26 +129,29 @@ public class FmRadioActivity extends BaseActivity implements RulerView.FmRateUpd
      */
     @OnCheckedChanged({R.id.rb_collct, R.id.rb_search})
     public void onRadioCheck(CompoundButton view, boolean ischanged) {
+        FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
         switch (view.getId()) {
             case R.id.rb_collct:
                 if (ischanged) {
-                    Toast.makeText(mContext, "收藏列表", Toast.LENGTH_SHORT).show();
+                    ToastUtils.show("收藏列表");
                     mRbSearch.setAlpha(0.5F);
                     mRbCollect.setAlpha(1.0f);
-                    mFmViewPager.setCurrentItem(1);
+                    mFmCollectListFragment = new FmCollectListFragment();
+                    fragmentTransaction.replace(R.id.fl_Content, mFmCollectListFragment, "mFmCollectListFragment");
                 }
                 break;
             case R.id.rb_search:
                 if (ischanged) {
-                    Toast.makeText(mContext, "搜索列表", Toast.LENGTH_SHORT).show();
+                    ToastUtils.show("搜索列表");
                     mRbCollect.setAlpha(0.5F);
                     mRbSearch.setAlpha(1.0f);
-                    mFmViewPager.setCurrentItem(0);
+                    mFmSearchListFragment = new FmSearchListFragment();
+                    fragmentTransaction.replace(R.id.fl_Content, mFmSearchListFragment, "mFmSearchListFragment");
                 }
                 break;
             default:
                 break;
         }
-
+        fragmentTransaction.commit();
     }
 }

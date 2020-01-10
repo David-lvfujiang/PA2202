@@ -20,6 +20,7 @@ import com.fenda.onn.ui.adapter.MusicEffectsAdapter;
 import com.fenda.onn.ui.view.ShapeView;
 import com.fenda.onn.utils.LogUtils;
 import com.fenda.onn.utils.ThreaLocalUtil;
+import com.fenda.onn.utils.ToastUtils;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -104,8 +105,7 @@ public class LightDjActivity extends BaseActivity implements ShapeView.AngleCall
         musicEffectsAdapter.setOnItemChildClickListener(new BaseQuickAdapter.OnItemChildClickListener() {
             @Override
             public void onItemChildClick(BaseQuickAdapter adapter, View view, int position) {
-                Toast.makeText(mContext, position + "", Toast.LENGTH_SHORT).show();
-                Log.e("TAG", position + "");
+                ToastUtils.show(position + "");
             }
         });
         showDefaultColor();
@@ -168,17 +168,22 @@ public class LightDjActivity extends BaseActivity implements ShapeView.AngleCall
     public void switchSoundEffects(View view) {
         switch (view.getId()) {
             case R.id.bt_miusic_alarm:
-                Toast.makeText(mContext, "bt_miusic_alarm", Toast.LENGTH_SHORT).show();
+                ToastUtils.show("bt_miusic_alarm");
                 break;
             case R.id.bt_miusic_alien:
+                ToastUtils.show("bt_miusic_alien");
                 break;
             case R.id.bt_miusic_hit:
+                ToastUtils.show("bt_miusic_hit");
                 break;
             case R.id.bt_miusic_kick:
+                ToastUtils.show("bt_miusic_kick");
                 break;
             case R.id.bt_miusic_radio:
+                ToastUtils.show("bt_miusic_radio");
                 break;
             case R.id.bt_miusic_rewind:
+                ToastUtils.show("bt_miusic_rewind");
                 break;
             default:
                 finish();
@@ -193,7 +198,7 @@ public class LightDjActivity extends BaseActivity implements ShapeView.AngleCall
      */
     @Override
     public void getAngle(View view, int angle) {
-        Log.e("TAG0", angle + view.getId() + "");
+        LogUtils.e("角度：" + angle);
         if (isHideColorPicker == false) {
             mShapeViewDisk.setVisibility(View.VISIBLE);
             mShapeView.setVisibility(View.GONE);

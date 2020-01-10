@@ -10,6 +10,9 @@ import org.litepal.crud.LitePalSupport;
 public class FmStationBean extends LitePalSupport {
     private String stationName;
 
+    public FmStationBean() {
+    }
+
     public FmStationBean(String stationName) {
         this.stationName = stationName;
     }

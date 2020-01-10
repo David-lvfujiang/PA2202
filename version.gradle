@@ -15,6 +15,9 @@ versions.retrofit = "2.4.0"
 versions.logging_interceptor = "3.6.0"
 versions.rxlifecycle = "2.2.2"
 versions.butterknife = "10.0.0"
+versions.v4 = "24.2.1"
+versions.autosize = "0.9.5"
+versions.litepal = "3.0.0"
 //test
 versions.junit = "4.12"
 versions.test_espresso_core = "3.2.0"
@@ -23,6 +26,10 @@ versions.adapter_helper = "2.9.22"
 def deps = [:]
 
 def support = [:]
+
+support.v4 = "com.android.support:support-v4:$versions.v4"
+support.autosize = "me.jessyan:autosize:$versions.autosize"
+support.litepal = "org.litepal.android:java:$versions.litepal"
 
 support.appcompat = "androidx.appcompat:appcompat:$versions.appcompat"
 support.constraintlayout = "androidx.constraintlayout:constraintlayout:$versions.constraint"

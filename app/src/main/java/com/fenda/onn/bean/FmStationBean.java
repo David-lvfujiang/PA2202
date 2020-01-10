@@ -1,11 +1,13 @@
 package com.fenda.onn.bean;
 
+import org.litepal.crud.LitePalSupport;
+
 /**
  * @Author: david.lvfujiang
  * @Date: 2020/1/6
  * @Describe: FM台实体
  */
-public class FmStationBean {
+public class FmStationBean extends LitePalSupport {
     private String stationName;
 
     public FmStationBean(String stationName) {

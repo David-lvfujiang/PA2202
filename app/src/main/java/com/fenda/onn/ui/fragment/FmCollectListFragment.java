@@ -15,10 +15,14 @@ import com.fenda.onn.R;
 import com.fenda.onn.bean.FmStationBean;
 import com.fenda.onn.common.base.BaseFragment;
 import com.fenda.onn.ui.adapter.FmCollectListAdapter;
+import com.fenda.onn.utils.LogUtils;
+
+import org.litepal.LitePal;
 
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Iterator;
+import java.util.List;
 
 import butterknife.BindView;
 
@@ -31,7 +35,7 @@ public class FmCollectListFragment extends BaseFragment {
     @BindView(R.id.rv_fm_collect)
     RecyclerView mRvCollect;
     FmCollectListAdapter mCollectListAdapter;
-    ArrayList<FmStationBean> mListFmStations = new ArrayList<FmStationBean>();
+    static ArrayList<FmStationBean> mListFmStations = new ArrayList<FmStationBean>();
     ArrayList<String> mListFmStationName = new ArrayList<String>();
     HashSet<String> mCollectSets = new HashSet<String>();
 
@@ -50,41 +54,49 @@ public class FmCollectListFragment extends BaseFragment {
     protected void initView() {
     }
 
+
     @Override
     protected void initData() {
         super.initData();
         getFmStationSet();
-        mCollectListAdapter = new FmCollectListAdapter(R.layout.item_fm_collect, mListFmStations);
-        mCollectListAdapter.openLoadAnimation();
-        mRvCollect.setLayoutManager(new LinearLayoutManager(getContext()));
-        mRvCollect.setAdapter(mCollectListAdapter);
     }
 
-    @Override
-    public void onHiddenChanged(boolean hidden) {
-        Log.e("TAG", "setUserVisibleHint");
-        getFmStationSet();
-        mCollectListAdapter.notifyDataSetChanged();
-    }
+//    @Override
+//    public void setUserVisibleHint(boolean b) {
+//        if (mRvCollect != null) {
+//            Log.e("TAG", "setUserVisibleHint");
+//            getFmStationSet();
+//            mCollectListAdapter.loadMoreComplete();
+//        }
+//    }
 
     /**
      * 获取FM收藏列表
      */
     public void getFmStationSet() {
+        mListFmStations = (ArrayList<FmStationBean>) LitePal.findAll(FmStationBean.class);
+        LogUtils.e(mListFmStations.size() + "数组");
+        mCollectListAdapter = new FmCollectListAdapter(R.layout.item_fm_collect, mListFmStations);
+        mCollectListAdapter.openLoadAnimation();
+        mRvCollect.setLayoutManager(new LinearLayoutManager(getContext()));
+        mRvCollect.setAdapter(mCollectListAdapter);
+        mCollectListAdapter.notifyDataSetChanged();
+
     }
 
     /**
      * 删除FM收藏item
      *
-     * @param set
+     * @param bean
      */
-    public void updateFmData(HashSet<String> set) {
-
+    public void updateFmData(FmStationBean bean) {
+        LitePal.deleteAll(FmStationBean.class, "stationName = ?", bean.getStationName().trim());
+        mListFmStations.remove(bean);
+        mCollectListAdapter.notifyDataSetChanged();
     }
 
     @Override
-    protected void initListener() {
-        super.initListener();
+    public void initListener() {
         mCollectListAdapter.setOnItemClickListener(new BaseQuickAdapter.OnItemClickListener() {
             @Override
             public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
@@ -97,11 +109,9 @@ public class FmCollectListFragment extends BaseFragment {
                 switch (view.getId()) {
                     case R.id.bt_fm_cancel:
                         Toast.makeText(mContext, "取消收藏" + position, Toast.LENGTH_SHORT).show();
-                        mListFmStations.remove(position);
-                        mListFmStationName.remove(position);
-                        HashSet<String> hashSet = new HashSet<String>(mListFmStationName);
-                        updateFmData(hashSet);
-                        mCollectListAdapter.notifyDataSetChanged();
+                        LogUtils.e(mListFmStations.size() + "数组");
+                        LogUtils.e(mListFmStations.get(position).getStationName());
+                        updateFmData(mListFmStations.get(position));
                         break;
                     case R.id.bt_collect_compile:
                         Toast.makeText(mContext, "编辑" + position, Toast.LENGTH_SHORT).show();

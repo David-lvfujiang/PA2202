@@ -74,6 +74,10 @@ public abstract class BaseFragment extends Fragment {
         mViewContent.setLayoutResource(onBindLayout());
         mViewContent.inflate();
     }
+    @Override
+    public void onActivityCreated(@Nullable Bundle savedInstanceState) {
+        super.onActivityCreated(savedInstanceState);
+    }
 
     @Override
     public void setUserVisibleHint(boolean isVisibleToUser) {

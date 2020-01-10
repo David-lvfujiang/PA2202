@@ -120,7 +120,7 @@
 
     </RadioGroup>
 
-    <FrameLayout
+    <com.fenda.onn.ui.view.NoScrollViewPager
         android:id="@+id/fl_Content"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -129,18 +129,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/radioGroup">
 
-        <fragment
-            android:id="@+id/fm_collect_list_ragment"
-            android:name="com.fenda.onn.ui.fragment.FmCollectListFragment"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
-        <fragment
-            android:id="@+id/fm_search_list_ragment"
-            android:name="com.fenda.onn.ui.fragment.FmSearchListFragment"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
-
-    </FrameLayout>
+    </com.fenda.onn.ui.view.NoScrollViewPager>
 
     <TextView
         android:id="@+id/textView2"

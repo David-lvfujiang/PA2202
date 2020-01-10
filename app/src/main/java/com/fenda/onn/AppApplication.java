@@ -3,8 +3,10 @@ package com.fenda.onn;
 import android.app.Activity;
 import android.app.Application;
 import android.content.Context;
+import android.database.sqlite.SQLiteDatabase;
 
 import org.litepal.LitePalApplication;
+import org.litepal.tablemanager.Connector;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -22,6 +24,7 @@ public class AppApplication extends LitePalApplication {
     public void onCreate() {
         super.onCreate();
         mContext = this;
+        SQLiteDatabase db = Connector.getDatabase();
     }
     public static Context getContext() {
         return mContext;

@@ -18,6 +18,7 @@ import com.fenda.onn.R;
 import com.fenda.onn.bean.FmStationBean;
 import com.fenda.onn.common.base.BaseFragment;
 import com.fenda.onn.ui.adapter.FmSearchListAdapter;
+import com.fenda.onn.utils.LogUtils;
 
 import java.util.ArrayList;
 import java.util.HashSet;
@@ -118,6 +119,9 @@ public class FmSearchListFragment extends BaseFragment {
                     case R.id.rb_fm_love:
                         Toast.makeText(mContext, "收藏" + position, Toast.LENGTH_SHORT).show();
                         String stationName = mListFmStations.get(position).getStationName();
+                        FmStationBean bean = new FmStationBean(stationName);
+                        boolean success = bean.save();
+                        LogUtils.e(success+"成功");
                         Toast.makeText(mContext, stationName + position, Toast.LENGTH_SHORT).show();
                         break;
                     default:

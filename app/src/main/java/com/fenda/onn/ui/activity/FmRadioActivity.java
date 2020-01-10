@@ -18,10 +18,16 @@ import androidx.fragment.app.FragmentTransaction;
 
 import com.fenda.onn.R;
 import com.fenda.onn.common.base.BaseActivity;
+import com.fenda.onn.common.base.BaseFragment;
+import com.fenda.onn.ui.adapter.ProductionSeriesPagerAdapter;
 import com.fenda.onn.ui.fragment.FmCollectListFragment;
 import com.fenda.onn.ui.fragment.FmSearchListFragment;
+import com.fenda.onn.ui.view.NoScrollViewPager;
 import com.fenda.onn.ui.view.RulerView;
 import com.fenda.onn.utils.ToastUtils;
+
+import java.util.ArrayList;
+import java.util.List;
 
 import butterknife.BindView;
 import butterknife.OnCheckedChanged;
@@ -48,7 +54,8 @@ public class FmRadioActivity extends BaseActivity implements RulerView.FmRateUpd
     @BindView(R.id.rb_collct)
     RadioButton mRbCollect;
     @BindView(R.id.fl_Content)
-    FrameLayout mFrameLayout;
+    NoScrollViewPager mFmViewPager;
+    private List<BaseFragment> mFragmentList = new ArrayList<>();
     FmSearchListFragment mFmSearchListFragment;
     FmCollectListFragment mFmCollectListFragment;
 
@@ -62,10 +69,12 @@ public class FmRadioActivity extends BaseActivity implements RulerView.FmRateUpd
     public void initView() {
         //刻度尺滑动监听
         mRulerView.setFmRateUpdateListener(this);
-        mFmSearchListFragment = (FmSearchListFragment) getSupportFragmentManager()
-                .findFragmentById(R.id.fm_search_list_ragment);
-        mFmCollectListFragment = (FmCollectListFragment) getSupportFragmentManager()
-                .findFragmentById(R.id.fm_collect_list_ragment);
+        mFmSearchListFragment = new FmSearchListFragment();
+        mFmCollectListFragment = new FmCollectListFragment();
+        mFragmentList.add(mFmSearchListFragment);
+        mFragmentList.add(mFmCollectListFragment);
+        FragmentManager manger = getSupportFragmentManager();
+        mFmViewPager.setAdapter(new ProductionSeriesPagerAdapter(manger, mFragmentList));
     }
 
     @Override
@@ -129,15 +138,13 @@ public class FmRadioActivity extends BaseActivity implements RulerView.FmRateUpd
      */
     @OnCheckedChanged({R.id.rb_collct, R.id.rb_search})
     public void onRadioCheck(CompoundButton view, boolean ischanged) {
-        final FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
         switch (view.getId()) {
             case R.id.rb_collct:
                 if (ischanged) {
                     Toast.makeText(mContext, "收藏列表", Toast.LENGTH_SHORT).show();
                     mRbSearch.setAlpha(0.5F);
                     mRbCollect.setAlpha(1.0f);
-                    ft.hide(mFmSearchListFragment);
-                    ft.show(mFmCollectListFragment);
+                    mFmViewPager.setCurrentItem(1);
                 }
                 break;
             case R.id.rb_search:
@@ -145,13 +152,12 @@ public class FmRadioActivity extends BaseActivity implements RulerView.FmRateUpd
                     Toast.makeText(mContext, "搜索列表", Toast.LENGTH_SHORT).show();
                     mRbCollect.setAlpha(0.5F);
                     mRbSearch.setAlpha(1.0f);
-                    ft.hide(mFmCollectListFragment);
-                    ft.show(mFmSearchListFragment);
+                    mFmViewPager.setCurrentItem(0);
                 }
                 break;
             default:
                 break;
         }
-        ft.commit();
+
     }
 }

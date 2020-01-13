@@ -73,12 +73,16 @@ public class MainActivity extends BaseMvpActivity implements View.OnClickListene
     public void showErrorTip(String msg) {
     }
 
-    @OnClick({R.id.tvLightDj, R.id.tvFm, R.id.ivSetting, R.id.ivTws, R.id.ivEdit, R.id.tvAgreement})
+    @OnClick({R.id.tvLightDj, R.id.tvLightMode, R.id.tvFm, R.id.ivSetting, R.id.ivTws, R.id.ivEdit, R.id.tvAgreement})
     public void handleClickEvent(View v) {
         Intent intent = new Intent();
         switch (v.getId()) {
             case R.id.tvLightDj:
                 intent.setClass(mContext, LightDjActivity.class);
+                startActivity(intent);
+                break;
+            case R.id.tvLightMode:
+                intent.setClass(mContext, LightModelActivity.class);
                 startActivity(intent);
                 break;
             case R.id.tvFm:

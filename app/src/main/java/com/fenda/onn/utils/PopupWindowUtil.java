@@ -37,7 +37,8 @@ public class PopupWindowUtil {
         int heightPixels = outMetrics.heightPixels;
         if (isProportionateHeight) {
             if (isProportionateWidth) {
-                mPopupWindow = new PopupWindow(view, (int) (widthPixels * WIDTH_PERCENTAGE), (int) (heightPixels * HIGH_PERCENTAGE), true);
+                mPopupWindow = new PopupWindow(view, (int) (widthPixels * WIDTH_PERCENTAGE),
+                        (int) (heightPixels * HIGH_PERCENTAGE), true);
             } else {
                 mPopupWindow = new PopupWindow(view, WIDTH, (int) (heightPixels * HIGH_PERCENTAGE), true);
             }

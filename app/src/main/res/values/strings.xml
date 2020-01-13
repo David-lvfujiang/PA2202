@@ -67,6 +67,8 @@
     <string name="fm_collect_success">收藏成功</string>
     <string name="fm_already_collect">您已收藏过该频道</string>
     <string name="fm_collect_cancel">取消收藏成功</string>
+    <string name="device_connecting">正在连接...</string>
+
 
 
 </resources>

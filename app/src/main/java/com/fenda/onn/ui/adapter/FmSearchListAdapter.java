@@ -24,10 +24,19 @@ public class FmSearchListAdapter extends BaseQuickAdapter<FmStationBean, BaseVie
         super(layoutResId, data);
     }
 
+    /**
+     * 重写该方法防止checkBox复用错乱
+     *
+     * @param position
+     * @return
+     */
+    @Override
+    public int getItemViewType(int position) {
+        return position;
+    }
     @Override
     protected void convert(BaseViewHolder helper, FmStationBean item) {
-        //禁止复用，否则checkBox会错乱
-        helper.setIsRecyclable(false);
+
         //查询收藏列表
         List<FmStationBean> fmStationBeans = LitePal.where("stationName=?", item.getStationName()).find(FmStationBean.class);
         if (fmStationBeans.size() > 0) {

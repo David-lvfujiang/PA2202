@@ -20,13 +20,11 @@ import com.fenda.onn.bean.FmStationBean;
 import com.fenda.onn.common.base.BaseFragment;
 import com.fenda.onn.ui.adapter.FmCollectListAdapter;
 import com.fenda.onn.ui.view.ClearWriteEditText;
-import com.fenda.onn.utils.LogUtils;
 import com.fenda.onn.utils.ToastUtils;
 
 import org.litepal.LitePal;
 
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.List;
 
 import butterknife.BindView;
@@ -45,7 +43,7 @@ public class FmCollectListFragment extends BaseFragment implements View.OnClickL
     private FmStationBean fmStationBean;
     private View mFmPopupWindowLayout;
     private PopupWindow mPopupWindow;
-    private String FmRemark;
+    private String fmRemark;
     private ClearWriteEditText mClearWriteEditText;
     private Button mBtCancel, mBtConfirm;
 

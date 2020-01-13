@@ -2,27 +2,16 @@ package com.fenda.onn.ui.activity;
 
 import android.content.Context;
 import android.content.Intent;
-import android.graphics.Color;
-import android.graphics.drawable.ColorDrawable;
-import android.util.DisplayMetrics;
-import android.util.Log;
 import android.view.Gravity;
 import android.view.View;
-import android.view.ViewGroup;
-import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
-import android.widget.PopupWindow;
-import android.widget.RadioGroup;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.fenda.onn.R;
 import com.fenda.onn.common.base.BaseMvpActivity;
-import com.fenda.onn.config.Constant;
-import com.fenda.onn.utils.DensityUtil;
-import com.fenda.onn.utils.LogUtils;
+import com.fenda.onn.utils.PopupWindowUtil;
 import com.fenda.onn.utils.ToastUtils;
 
 import butterknife.BindView;
@@ -53,7 +42,6 @@ public class MainActivity extends BaseMvpActivity implements View.OnClickListene
     @BindView(R.id.tvAgreement)
     TextView mTvAgreement;
 
-    private PopupWindow mPopupWindow;
     private View mTwsPopupWindowLayout;
     private View mRgUpdatePopupWindowLayout;
     private View mResetConnectPopupWindowLayout;
@@ -121,7 +109,8 @@ public class MainActivity extends BaseMvpActivity implements View.OnClickListene
      */
     public void showUpdateDeviceNamePopupWindow() {
         initUpdateDeviceNamePopupWindow();
-        createPopupWindow(mRgUpdatePopupWindowLayout, POPUPWINDOW_WIDTH, POPUPWINDOW_HIGH, 0, 0, true);
+        PopupWindowUtil.createPopupWindow(this, mRgUpdatePopupWindowLayout, true, true,
+                false, Gravity.CENTER);
     }
 
     /**
@@ -142,7 +131,8 @@ public class MainActivity extends BaseMvpActivity implements View.OnClickListene
     public void showTwsPopupWindow() {
         initTwsPopupWindow();
         mBtConnectTws.setEnabled(true);
-        createPopupWindow(mTwsPopupWindowLayout, POPUPWINDOW_WIDTH, POPUPWINDOW_HIGH, 0, 0, true);
+        PopupWindowUtil.createPopupWindow(this, mTwsPopupWindowLayout, true, true,
+                false, Gravity.CENTER);
     }
 
     /**
@@ -176,7 +166,8 @@ public class MainActivity extends BaseMvpActivity implements View.OnClickListene
      */
     public void showResetConnectPopupWindow() {
         initResetConnectPopupWindow();
-        createPopupWindow(mResetConnectPopupWindowLayout, POPUPWINDOW_WIDTH, POPUPWINDOW_HIGH, 0, 0, false);
+        PopupWindowUtil.createPopupWindow(this, mResetConnectPopupWindowLayout, false, true,
+                false, Gravity.CENTER);
     }
 
     /**
@@ -191,42 +182,6 @@ public class MainActivity extends BaseMvpActivity implements View.OnClickListene
         mBtResetConnect.setOnClickListener(this);
     }
 
-    /**
-     * 创建PopupWindow
-     *
-     * @param view    布局文件
-     * @param width   宽度
-     * @param high    高度
-     * @param offsetX X轴偏移量
-     * @param offsetY Y轴偏移量
-     * @param isFocus 点击外部是否关闭
-     */
-    public void createPopupWindow(View view, int width, int high, int offsetX, int offsetY, boolean isFocus) {
-        WindowManager.LayoutParams lp = getWindow().getAttributes();
-        DisplayMetrics outMetrics = new DisplayMetrics();
-        getWindowManager().getDefaultDisplay().getMetrics(outMetrics);
-        int widthPixels = outMetrics.widthPixels;
-        int heightPixels = outMetrics.heightPixels;
-        LogUtils.e("TAG", "widthPixels = " + widthPixels + ",heightPixels = " + heightPixels);
-        mPopupWindow = new PopupWindow(view, (int) (widthPixels * 0.8), -2, true);
-        mPopupWindow.setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
-        mPopupWindow.setOutsideTouchable(isFocus);
-        mPopupWindow.setFocusable(isFocus);
-        //设置背景为半透明
-        lp.alpha = 0.5f;
-        getWindow().setAttributes(lp);
-        //监听PopupWindow关闭时将透明度设置成原来
-        mPopupWindow.setOnDismissListener(new PopupWindow.OnDismissListener() {
-            @Override
-            public void onDismiss() {
-                WindowManager.LayoutParams lp = getWindow().getAttributes();
-                lp.alpha = 1f;
-                getWindow().setAttributes(lp);
-            }
-        });
-        //设置弹窗位置PopupWindow的相关参数
-        mPopupWindow.showAtLocation(getWindow().getDecorView(), Gravity.CENTER, offsetX, offsetY);
-    }
 
     /**
      * PopupWindow点击事件处理
@@ -251,10 +206,8 @@ public class MainActivity extends BaseMvpActivity implements View.OnClickListene
                 break;
             case R.id.rb_confirm:
                 String newDeviceName = mEtDeviceName.getText().toString().trim();
-                if (newDeviceName != null && "".equals(newDeviceName)) {
-                    mTvDviceName.setText(newDeviceName);
-                    closePopPopupWindow();
-                }
+                mTvDviceName.setText(newDeviceName);
+                closePopPopupWindow();
                 break;
             case R.id.bt_re_connect:
                 ToastUtils.show("重连");
@@ -289,9 +242,6 @@ public class MainActivity extends BaseMvpActivity implements View.OnClickListene
      * 关闭弹窗
      */
     public void closePopPopupWindow() {
-        if (mPopupWindow != null && mPopupWindow.isShowing()) {
-            mPopupWindow.dismiss();
-            mPopupWindow = null;
-        }
+        PopupWindowUtil.closePopPopupWindow();
     }
 }

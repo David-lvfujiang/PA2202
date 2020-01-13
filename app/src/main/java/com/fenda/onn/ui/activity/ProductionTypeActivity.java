@@ -1,16 +1,10 @@
 package com.fenda.onn.ui.activity;
 
 import android.content.Intent;
-import android.graphics.Color;
-import android.graphics.drawable.ColorDrawable;
-import android.util.DisplayMetrics;
-import android.util.Log;
 import android.view.Gravity;
 import android.view.View;
-import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.ImageView;
-import android.widget.PopupWindow;
 
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -20,6 +14,7 @@ import com.fenda.onn.bean.ProductionTypeBean;
 import com.fenda.onn.common.base.BaseActivity;
 import com.fenda.onn.config.Constant;
 import com.fenda.onn.ui.adapter.ProductionTypeAdapter;
+import com.fenda.onn.utils.PopupWindowUtil;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -45,7 +40,6 @@ public class ProductionTypeActivity extends BaseActivity implements View.OnClick
     private List<ProductionTypeBean> mDatas;
     private ProductionTypeAdapter mAdapter;
     private View mPrivacyPolicyPopupWindowLayout;
-    private PopupWindow mPopupWindow;
 
     @Override
     public int onBindLayout() {
@@ -94,52 +88,15 @@ public class ProductionTypeActivity extends BaseActivity implements View.OnClick
     }
 
     public void createPrivacyPolicyPopupWindow() {
-        createPopupWindow(mPrivacyPolicyPopupWindowLayout, POPUPWINDOW_WIDTH, POPUPWINDOW_HIGH, 0, 0, true);
-    }
-
-    /**
-     * @param view    布局文件
-     * @param width   宽度
-     * @param high    高度
-     * @param offsetX X轴偏移量
-     * @param offsetY Y轴偏移量
-     * @param isFocus 点击外部是否关闭
-     */
-    public void createPopupWindow(View view, int width, int high, int offsetX, int offsetY, boolean isFocus) {
-        WindowManager.LayoutParams lp = getWindow().getAttributes();
-        DisplayMetrics outMetrics = new DisplayMetrics();
-        getWindowManager().getDefaultDisplay().getMetrics(outMetrics);
-        int widthPixels = outMetrics.widthPixels;
-        int heightPixels = outMetrics.heightPixels;
-        Log.e("TAG", "widthPixels = " + widthPixels + ",heightPixels = " + heightPixels);
-        mPopupWindow = new PopupWindow(view, (int) (widthPixels * 0.9), (int) (heightPixels * 0.8), true);
-        mPopupWindow.setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
-        mPopupWindow.setOutsideTouchable(isFocus);
-        mPopupWindow.setFocusable(isFocus);
-        //设置背景为半透明
-        lp.alpha = 0.5f;
-        getWindow().setAttributes(lp);
-        //监听PopupWindow关闭时将透明度设置成原来
-        mPopupWindow.setOnDismissListener(new PopupWindow.OnDismissListener() {
-            @Override
-            public void onDismiss() {
-                WindowManager.LayoutParams lp = getWindow().getAttributes();
-                lp.alpha = 1f;
-                getWindow().setAttributes(lp);
-            }
-        });
-        //设置弹窗位置PopupWindow的相关参数
-        mPopupWindow.showAtLocation(getWindow().getDecorView(), Gravity.CENTER, offsetX, offsetY);
+        PopupWindowUtil.createPopupWindow(this, mPrivacyPolicyPopupWindowLayout, true, true,
+                true, Gravity.CENTER);
     }
 
     /**
      * 关闭弹窗
      */
     public void closePopPopupWindow() {
-        if (mPopupWindow != null && mPopupWindow.isShowing()) {
-            mPopupWindow.dismiss();
-            mPopupWindow = null;
-        }
+        PopupWindowUtil.closePopPopupWindow();
     }
 
     @Override
@@ -155,4 +112,5 @@ public class ProductionTypeActivity extends BaseActivity implements View.OnClick
                 break;
         }
     }
+
 }

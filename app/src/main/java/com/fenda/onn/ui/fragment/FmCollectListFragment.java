@@ -20,6 +20,7 @@ import com.fenda.onn.bean.FmStationBean;
 import com.fenda.onn.common.base.BaseFragment;
 import com.fenda.onn.ui.adapter.FmCollectListAdapter;
 import com.fenda.onn.ui.view.ClearWriteEditText;
+import com.fenda.onn.utils.PopupWindowUtil;
 import com.fenda.onn.utils.ToastUtils;
 
 import org.litepal.LitePal;
@@ -28,6 +29,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.BindView;
+import retrofit2.http.PUT;
 
 /**
  * @Author: david.lvfujiang
@@ -118,54 +120,15 @@ public class FmCollectListFragment extends BaseFragment implements View.OnClickL
      * @param bean
      */
     public void updateFm(FmStationBean bean) {
-        createPopupWindow(mFmPopupWindowLayout, 0, 0, 0, 0, true);
-    }
-
-    /**
-     * 创建PopupWindow
-     *
-     * @param view    布局文件
-     * @param width   宽度
-     * @param high    高度
-     * @param offsetX X轴偏移量
-     * @param offsetY Y轴偏移量
-     * @param isFocus 点击外部是否关闭
-     */
-    public void createPopupWindow(View view, int width, int high, int offsetX, int offsetY, boolean isFocus) {
-        WindowManager.LayoutParams lp = getActivity().getWindow().getAttributes();
-        DisplayMetrics outMetrics = new DisplayMetrics();
-        getActivity().getWindowManager().getDefaultDisplay().getMetrics(outMetrics);
-        int widthPixels = outMetrics.widthPixels;
-        int heightPixels = outMetrics.heightPixels;
-        Log.e("TAG", "widthPixels = " + widthPixels + ",heightPixels = " + heightPixels);
-        mPopupWindow = new PopupWindow(view, (int) (widthPixels * 0.8), -2, true);
-        mPopupWindow.setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
-        mPopupWindow.setOutsideTouchable(isFocus);
-        mPopupWindow.setFocusable(isFocus);
-        //设置背景为半透明
-        lp.alpha = 0.5f;
-        getActivity().getWindow().setAttributes(lp);
-        //监听PopupWindow关闭时将透明度设置成原来
-        mPopupWindow.setOnDismissListener(new PopupWindow.OnDismissListener() {
-            @Override
-            public void onDismiss() {
-                WindowManager.LayoutParams lp = getActivity().getWindow().getAttributes();
-                lp.alpha = 1f;
-                getActivity().getWindow().setAttributes(lp);
-            }
-        });
-        //设置弹窗位置PopupWindow的相关参数
-        mPopupWindow.showAtLocation(getActivity().getWindow().getDecorView(), Gravity.CENTER, offsetX, offsetY);
+        PopupWindowUtil.createPopupWindow(getActivity(), mFmPopupWindowLayout, true, true,
+                false, Gravity.CENTER);
     }
 
     /**
      * 关闭弹窗
      */
     public void closePopPopupWindow() {
-        if (mPopupWindow != null && mPopupWindow.isShowing()) {
-            mPopupWindow.dismiss();
-            mPopupWindow = null;
-        }
+        PopupWindowUtil.closePopPopupWindow();
     }
 
     @Override

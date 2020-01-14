@@ -34,7 +34,7 @@ public class MainActivity extends BaseMvpActivity {
     @BindView(R.id.ivDevice_second)
     ImageView mImgDeviceSecond;
     @BindView(R.id.tv_Device_Second_Name)
-    TextView mTVDeviceSecondName;
+    TextView mTvDeviceSecondName;
     @BindView(R.id.tvAgreement)
     TextView mTvAgreement;
 
@@ -216,10 +216,10 @@ public class MainActivity extends BaseMvpActivity {
     public void showDeviceSecond(boolean isShow) {
         if (isShow) {
             mImgDeviceSecond.setVisibility(View.VISIBLE);
-            mTVDeviceSecondName.setVisibility(View.VISIBLE);
+            mTvDeviceSecondName.setVisibility(View.VISIBLE);
         } else {
             mImgDeviceSecond.setVisibility(View.GONE);
-            mTVDeviceSecondName.setVisibility(View.GONE);
+            mTvDeviceSecondName.setVisibility(View.GONE);
         }
     }
 

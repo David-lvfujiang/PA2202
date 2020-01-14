@@ -10,7 +10,11 @@ import com.fenda.onn.utils.ToastUtils;
 
 import butterknife.OnCheckedChanged;
 import butterknife.OnClick;
-
+/**
+ * @author David-lvfujiang
+ * @time 2019/12/30 17:18
+ * desc  Light Model 界面
+ */
 public class LightModelActivity extends BaseActivity {
 
     @Override

@@ -1,12 +1,6 @@
 package com.fenda.onn.ui.activity;
 
-import android.graphics.Color;
-import android.graphics.drawable.ColorDrawable;
-import android.view.Gravity;
-import android.view.View;
-import android.view.WindowManager;
 import android.widget.CompoundButton;
-import android.widget.PopupWindow;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.TextView;

@@ -66,33 +66,26 @@ public class FmSearchListFragment extends BaseFragment {
     protected void initListener() {
         super.initListener();
         mSwipeRefreshLayout.setColorSchemeColors(getResources().getColor(R.color.fd_text_3c88d4, null));
-        mSwipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
-            @Override
-            public void onRefresh() {
-                //数据重新加载完成后，更新适配器
-                mSearchListAdapter.notifyDataSetChanged();
-                //取消刷新
-                mSwipeRefreshLayout.setRefreshing(false);
-            }
+        mSwipeRefreshLayout.setOnRefreshListener(() -> {
+            //数据重新加载完成后，更新适配器
+            mSearchListAdapter.notifyDataSetChanged();
+            //取消刷新
+            mSwipeRefreshLayout.setRefreshing(false);
         });
+
         //item点击事件
-        mSearchListAdapter.setOnItemClickListener(new BaseQuickAdapter.OnItemClickListener() {
-            @Override
-            public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
-                Toast.makeText(mContext, "第" + position + "项", Toast.LENGTH_SHORT).show();
-            }
+        mSearchListAdapter.setOnItemClickListener((adapter, view, position) -> {
+            Toast.makeText(mContext, "第" + position + "项", Toast.LENGTH_SHORT).show();
         });
+
         //item子控件点击事件
-        mSearchListAdapter.setOnItemChildClickListener(new BaseQuickAdapter.OnItemChildClickListener() {
-            @Override
-            public void onItemChildClick(BaseQuickAdapter adapter, View view, int position) {
-                switch (view.getId()) {
-                    case R.id.bt_compile:
-                        Toast.makeText(mContext, "编辑" + position, Toast.LENGTH_SHORT).show();
-                        break;
-                    default:
-                        break;
-                }
+        mSearchListAdapter.setOnItemChildClickListener((adapter, view, position) -> {
+            switch (view.getId()) {
+                case R.id.bt_compile:
+                    Toast.makeText(mContext, "编辑" + position, Toast.LENGTH_SHORT).show();
+                    break;
+                default:
+                    break;
             }
         });
     }

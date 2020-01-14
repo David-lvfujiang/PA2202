@@ -20,7 +20,7 @@ import butterknife.OnClick;
  * @time 2019/12/30 17:18
  * desc  关于设备界面
  */
-public class AboutDeviceActivity extends BaseActivity implements View.OnClickListener, RadioGroup.OnCheckedChangeListener {
+public class AboutDeviceActivity extends BaseActivity {
     private PopupWindow mPopupWindow;
     private View mBottomView;
     private RadioGroup mRgLanguage;
@@ -34,14 +34,6 @@ public class AboutDeviceActivity extends BaseActivity implements View.OnClickLis
 
     @Override
     public void initView() {
-        //底部对话框布局
-        mBottomView = View.inflate(mContext, R.layout.layout_device_about_dialog, null);
-        mRgLanguage = mBottomView.findViewById(R.id.rg_language);
-        mBtCancel = mBottomView.findViewById(R.id.bt_cancel);
-        mBtConfirm = mBottomView.findViewById(R.id.bt_confirm);
-        mRgLanguage.setOnCheckedChangeListener(this);
-        mBtConfirm.setOnClickListener(this);
-        mBtCancel.setOnClickListener(this);
     }
 
     @Override
@@ -56,6 +48,7 @@ public class AboutDeviceActivity extends BaseActivity implements View.OnClickLis
                 ToastUtils.show("更新");
                 break;
             case R.id.tv_language:
+                initLanguagePopuWindow();
                 showLanguagePopupWindow();
                 break;
             case R.id.tv_privacy:
@@ -67,6 +60,34 @@ public class AboutDeviceActivity extends BaseActivity implements View.OnClickLis
             default:
                 break;
         }
+    }
+
+    public void initLanguagePopuWindow() {
+        //底部对话框布局
+        mBottomView = View.inflate(mContext, R.layout.layout_device_about_dialog, null);
+        mRgLanguage = mBottomView.findViewById(R.id.rg_language);
+        mBtCancel = mBottomView.findViewById(R.id.bt_cancel);
+        mBtConfirm = mBottomView.findViewById(R.id.bt_confirm);
+        mRgLanguage.setOnCheckedChangeListener((group, checkId) -> {
+            switch (checkId) {
+                case R.id.rb_chinese:
+                    ToastUtils.show("简体中文");
+                    break;
+                case R.id.rb_english:
+                    ToastUtils.show("英文");
+                    break;
+                default:
+                    break;
+            }
+        });
+        mBtConfirm.setOnClickListener(v -> {
+            ToastUtils.show("确定");
+            closeLanguagePopPopupWindow();
+        });
+        mBtCancel.setOnClickListener(v -> {
+            ToastUtils.show("取消");
+            closeLanguagePopPopupWindow();
+        });
     }
 
     /**
@@ -99,42 +120,6 @@ public class AboutDeviceActivity extends BaseActivity implements View.OnClickLis
         if (mPopupWindow != null && mPopupWindow.isShowing()) {
             mPopupWindow.dismiss();
             mPopupWindow = null;
-        }
-    }
-
-    @Override
-    public void onClick(View v) {
-        switch (v.getId()) {
-            case R.id.bt_confirm:
-                ToastUtils.show("确定");
-                closeLanguagePopPopupWindow();
-                break;
-            case R.id.bt_cancel:
-                ToastUtils.show("取消");
-                closeLanguagePopPopupWindow();
-                break;
-            default:
-                break;
-        }
-    }
-
-    /**
-     * 切换语言
-     *
-     * @param group
-     * @param checkedId
-     */
-    @Override
-    public void onCheckedChanged(RadioGroup group, int checkedId) {
-        switch (checkedId) {
-            case R.id.rb_chinese:
-                ToastUtils.show("简体中文");
-                break;
-            case R.id.rb_english:
-                ToastUtils.show("英文");
-                break;
-            default:
-                break;
         }
     }
 }

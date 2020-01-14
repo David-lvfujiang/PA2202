@@ -27,9 +27,8 @@ import butterknife.OnClick;
  * @time 2019/12/30 16:21
  * desc  产品类型界面
  */
-public class ProductionTypeActivity extends BaseActivity implements View.OnClickListener {
-    private final int POPUPWINDOW_WIDTH = 900;
-    private final int POPUPWINDOW_HIGH = -2;
+public class ProductionTypeActivity extends BaseActivity {
+
     @BindView(R.id.ivHead)
     ImageView ivHead;
     @BindView(R.id.ivBack)
@@ -48,11 +47,6 @@ public class ProductionTypeActivity extends BaseActivity implements View.OnClick
 
     @Override
     public void initView() {
-        mPrivacyPolicyPopupWindowLayout = View.inflate(mContext, R.layout.layout_privacy_policy_dialog, null);
-        mBtAgree = mPrivacyPolicyPopupWindowLayout.findViewById(R.id.bt_agree);
-        mBtCancel = mPrivacyPolicyPopupWindowLayout.findViewById(R.id.bt_cancel);
-        mBtAgree.setOnClickListener(this);
-        mBtCancel.setOnClickListener(this);
     }
 
     @Override
@@ -74,11 +68,8 @@ public class ProductionTypeActivity extends BaseActivity implements View.OnClick
     @Override
     protected void initListener() {
         super.initListener();
-        mAdapter.setOnProductionTypeItemClickListener(new ProductionTypeAdapter.OnProductionTypeItemClickListener() {
-            @Override
-            public void onProductionTypeItemClick(ProductionTypeBean bean) {
-                createPrivacyPolicyPopupWindow();
-            }
+        mAdapter.setOnProductionTypeItemClickListener(bean -> {
+            createPrivacyPolicyPopupWindow();
         });
     }
 
@@ -88,8 +79,22 @@ public class ProductionTypeActivity extends BaseActivity implements View.OnClick
     }
 
     public void createPrivacyPolicyPopupWindow() {
+        initPrivacyPolicyPopupWindow();
         PopupWindowUtil.createPopupWindow(this, mPrivacyPolicyPopupWindowLayout, true, true,
                 true, Gravity.CENTER);
+    }
+
+    public void initPrivacyPolicyPopupWindow() {
+        mPrivacyPolicyPopupWindowLayout = View.inflate(mContext, R.layout.layout_privacy_policy_dialog, null);
+        mBtAgree = mPrivacyPolicyPopupWindowLayout.findViewById(R.id.bt_agree);
+        mBtCancel = mPrivacyPolicyPopupWindowLayout.findViewById(R.id.bt_cancel);
+        mBtAgree.setOnClickListener(v -> {
+            closePopPopupWindow();
+            startActivity(new Intent(mContext, DeviceConnectionActivity.class));
+        });
+        mBtCancel.setOnClickListener(v -> {
+            closePopPopupWindow();
+        });
     }
 
     /**
@@ -97,20 +102,6 @@ public class ProductionTypeActivity extends BaseActivity implements View.OnClick
      */
     public void closePopPopupWindow() {
         PopupWindowUtil.closePopPopupWindow();
-    }
-
-    @Override
-    public void onClick(View view) {
-        switch (view.getId()) {
-            case R.id.bt_agree:
-                closePopPopupWindow();
-                startActivity(new Intent(mContext, DeviceConnectionActivity.class));
-                break;
-            case R.id.bt_cancel:
-                closePopPopupWindow();
-            default:
-                break;
-        }
     }
 
 }

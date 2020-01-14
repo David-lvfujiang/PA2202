@@ -104,11 +104,8 @@ public class DeviceConnectionActivity extends BaseActivity {
         mBtCancelConnect = mConnectPopupWindowLayout.findViewById(R.id.bt_connect);
         PopupWindowUtil.createPopupWindow(this, mConnectPopupWindowLayout, true, true,
                 false, Gravity.CENTER);
-        mBtCancelConnect.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                PopupWindowUtil.closePopPopupWindow();
-            }
+        mBtCancelConnect.setOnClickListener(v -> {
+            closePopPopupWindow();
         });
     }
 

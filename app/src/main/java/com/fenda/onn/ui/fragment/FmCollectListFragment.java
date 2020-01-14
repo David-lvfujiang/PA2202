@@ -1,20 +1,13 @@
 package com.fenda.onn.ui.fragment;
 
-import android.graphics.Color;
-import android.graphics.drawable.ColorDrawable;
-import android.util.DisplayMetrics;
-import android.util.Log;
 import android.view.Gravity;
 import android.view.View;
-import android.view.WindowManager;
 import android.widget.Button;
-import android.widget.PopupWindow;
 import android.widget.Toast;
 
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.fenda.onn.R;
 import com.fenda.onn.bean.FmStationBean;
 import com.fenda.onn.common.base.BaseFragment;
@@ -29,23 +22,19 @@ import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.BindView;
-import retrofit2.http.PUT;
 
 /**
  * @Author: david.lvfujiang
  * @Date: 2020/1/10
  * @Describe: FM收藏列表
  */
-public class FmCollectListFragment extends BaseFragment implements View.OnClickListener {
+public class FmCollectListFragment extends BaseFragment {
+
     @BindView(R.id.rv_fm_collect)
     RecyclerView mRvCollect;
     static List<FmStationBean> mListFmStations = new ArrayList<FmStationBean>();
     private FmCollectListAdapter fmCollectListAdapter;
-    private int index;
-    private FmStationBean fmStationBean;
     private View mFmPopupWindowLayout;
-    private PopupWindow mPopupWindow;
-    private String fmRemark;
     private ClearWriteEditText mClearWriteEditText;
     private Button mBtCancel, mBtConfirm;
 
@@ -60,8 +49,12 @@ public class FmCollectListFragment extends BaseFragment implements View.OnClickL
         mClearWriteEditText = mFmPopupWindowLayout.findViewById(R.id.clearWriteEditText);
         mBtConfirm = mFmPopupWindowLayout.findViewById(R.id.rb_confirm_update);
         mBtCancel = mFmPopupWindowLayout.findViewById(R.id.rb_cancel_update);
-        mBtConfirm.setOnClickListener(this);
-        mBtCancel.setOnClickListener(this);
+        mBtConfirm.setOnClickListener(v -> {
+            closePopPopupWindow();
+        });
+        mBtCancel.setOnClickListener(v -> {
+            closePopPopupWindow();
+        });
     }
 
     @Override
@@ -78,27 +71,21 @@ public class FmCollectListFragment extends BaseFragment implements View.OnClickL
     @Override
     protected void initListener() {
         super.initListener();
-        fmCollectListAdapter.setOnItemClickListener(new BaseQuickAdapter.OnItemClickListener() {
-            @Override
-            public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
-                ToastUtils.show("第" + position + "项", Toast.LENGTH_SHORT);
-            }
+        fmCollectListAdapter.setOnItemClickListener((adapter, view, position) -> {
+            ToastUtils.show("第" + position + "项", Toast.LENGTH_SHORT);
         });
 
-        fmCollectListAdapter.setOnItemChildClickListener(new BaseQuickAdapter.OnItemChildClickListener() {
-            @Override
-            public void onItemChildClick(BaseQuickAdapter adapter, View view, int position) {
-                switch (view.getId()) {
-                    case R.id.bt_fm_cancel:
-                        removeFm(mListFmStations.get(position));
-                        break;
-                    case R.id.bt_collect_compile:
-                        ToastUtils.show("修改" + position);
-                        updateFm(mListFmStations.get(position));
-                        break;
-                    default:
-                        break;
-                }
+        fmCollectListAdapter.setOnItemChildClickListener((adapter, view, position) -> {
+            switch (view.getId()) {
+                case R.id.bt_fm_cancel:
+                    removeFm(mListFmStations.get(position));
+                    break;
+                case R.id.bt_collect_compile:
+                    ToastUtils.show("修改" + position);
+                    updateFm(mListFmStations.get(position));
+                    break;
+                default:
+                    break;
             }
         });
     }
@@ -131,17 +118,4 @@ public class FmCollectListFragment extends BaseFragment implements View.OnClickL
         PopupWindowUtil.closePopPopupWindow();
     }
 
-    @Override
-    public void onClick(View view) {
-        switch (view.getId()) {
-            case R.id.rb_confirm_update:
-                closePopPopupWindow();
-                break;
-            case R.id.rb_cancel_update:
-                closePopPopupWindow();
-                break;
-            default:
-                break;
-        }
-    }
 }

@@ -1,7 +1,5 @@
 package com.fenda.onn.ui.adapter;
 
-import android.widget.CompoundButton;
-
 import androidx.annotation.Nullable;
 
 import com.chad.library.adapter.base.BaseQuickAdapter;
@@ -34,6 +32,7 @@ public class FmSearchListAdapter extends BaseQuickAdapter<FmStationBean, BaseVie
     public int getItemViewType(int position) {
         return position;
     }
+
     @Override
     protected void convert(BaseViewHolder helper, FmStationBean item) {
 
@@ -43,22 +42,19 @@ public class FmSearchListAdapter extends BaseQuickAdapter<FmStationBean, BaseVie
             helper.setChecked(R.id.rb_fm_love, true);
         }
         helper.setText(R.id.tv_fm_rate, item.getStationName());
-        helper.setOnCheckedChangeListener(R.id.rb_fm_love, new CompoundButton.OnCheckedChangeListener() {
-            @Override
-            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                if (isChecked) {
-                    if (fmStationBeans.size() > 0) {
-                        ToastUtils.show(R.string.fm_already_collect);
-                    } else {
-                        //保存收藏
-                        item.save();
-                        ToastUtils.show(R.string.fm_collect_success);
-                    }
+        helper.setOnCheckedChangeListener(R.id.rb_fm_love, (buttonView, isChecked) -> {
+            if (isChecked) {
+                if (fmStationBeans.size() > 0) {
+                    ToastUtils.show(R.string.fm_already_collect);
                 } else {
-                    //删除收藏
-                    LitePal.deleteAll(FmStationBean.class, "stationName = ?", item.getStationName().trim());
-                    ToastUtils.show(R.string.fm_collect_cancel);
+                    //保存收藏
+                    item.save();
+                    ToastUtils.show(R.string.fm_collect_success);
                 }
+            } else {
+                //删除收藏
+                LitePal.deleteAll(FmStationBean.class, "stationName = ?", item.getStationName().trim());
+                ToastUtils.show(R.string.fm_collect_cancel);
             }
         });
         helper.addOnClickListener(R.id.bt_compile);

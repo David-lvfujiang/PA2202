@@ -10,7 +10,6 @@ import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.fenda.onn.R;
 import com.fenda.onn.bean.MusicEffectsBean;
 import com.fenda.onn.common.base.BaseActivity;
@@ -33,6 +32,7 @@ import butterknife.OnClick;
  * desc  Light Dj 界面
  */
 public class LightDjActivity extends BaseActivity implements ShapeView.AngleCallbackListener {
+
     private final int BASE_ANGLE = 45;
     @BindView(R.id.ivBack)
     ImageView mImgBack;
@@ -66,7 +66,6 @@ public class LightDjActivity extends BaseActivity implements ShapeView.AngleCall
     private Button mBtCloseGuide;
     private List<MusicEffectsBean> musicEffectsBeanList = new ArrayList<MusicEffectsBean>();
     private Boolean isHideColorPicker = false;
-    private ThreadLocal<Integer> mThreaLocal = ThreaLocalUtil.getSharedPreferences();
 
     @Override
     public int onBindLayout() {
@@ -100,25 +99,9 @@ public class LightDjActivity extends BaseActivity implements ShapeView.AngleCall
         mDrawerRightRecycle.setLayoutManager(new GridLayoutManager(mContext, 1));
         mDrawerRightRecycle.setAdapter(musicEffectsAdapter);
         //设置监听
-        musicEffectsAdapter.setOnItemChildClickListener(new BaseQuickAdapter.OnItemChildClickListener() {
-            @Override
-            public void onItemChildClick(BaseQuickAdapter adapter, View view, int position) {
-                ToastUtils.show(position + "");
-            }
+        musicEffectsAdapter.setOnItemChildClickListener((adapter, view, position) -> {
+            ToastUtils.show(position + "");
         });
-        showDefaultColor();
-    }
-
-    /**
-     * 显示圆盘默认的颜色
-     */
-    public void showDefaultColor() {
-        if (!("null").equals(String.valueOf(mThreaLocal.get()))) {
-            isHideColorPicker = true;
-            mShapeView.setVisibility(View.GONE);
-            setRouletteBackground(mThreaLocal.get());
-            LogUtils.e(mThreaLocal.get() + "角度");
-        }
     }
 
     @OnClick({R.id.ivBack, R.id.ivHelp, R.id.img_miusic_library,
@@ -131,8 +114,7 @@ public class LightDjActivity extends BaseActivity implements ShapeView.AngleCall
                 break;
             case R.id.ivHelp:
                 mImgHelp.setVisibility(View.GONE);
-                initGuidePopupWindow();
-                PopupWindowUtil.createFullPopupWindow(LightDjActivity.this, mGuidePopupWindowLayout, true);
+                showGuidePopupWindow();
                 break;
             case R.id.img_miusic_library:
                 mDrawerLayout.openDrawer(Gravity.RIGHT);
@@ -160,29 +142,11 @@ public class LightDjActivity extends BaseActivity implements ShapeView.AngleCall
         }
     }
 
-
     /**
-     * 初始化修改备注PopupWindow相关参数
+     * 切换音效点击事件
+     *
+     * @param view
      */
-    public void initGuidePopupWindow() {
-        mGuidePopupWindowLayout = View.inflate(mContext, R.layout.layout_guide_dialog, null);
-        mBtCloseGuide = mGuidePopupWindowLayout.findViewById(R.id.bt_guide_close);
-        mBtCloseGuide.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                mImgHelp.setVisibility(View.VISIBLE);
-                closePopPopupWindow();
-            }
-        });
-    }
-
-    /**
-     * 关闭弹窗
-     */
-    public void closePopPopupWindow() {
-        PopupWindowUtil.closePopPopupWindow();
-    }
-
     @OnClick({R.id.bt_miusic_alarm, R.id.bt_miusic_alien, R.id.bt_miusic_hit, R.id.bt_miusic_kick,
             R.id.bt_miusic_radio, R.id.bt_miusic_rewind})
     public void switchSoundEffects(View view) {
@@ -211,6 +175,33 @@ public class LightDjActivity extends BaseActivity implements ShapeView.AngleCall
     }
 
     /**
+     * 显示初始化指导说明界面
+     */
+    public void showGuidePopupWindow() {
+        initGuidePopupWindow();
+        PopupWindowUtil.createFullPopupWindow(LightDjActivity.this, mGuidePopupWindowLayout, true);
+    }
+
+    /**
+     * 初始化指导说明界面
+     */
+    public void initGuidePopupWindow() {
+        mGuidePopupWindowLayout = View.inflate(mContext, R.layout.layout_guide_dialog, null);
+        mBtCloseGuide = mGuidePopupWindowLayout.findViewById(R.id.bt_guide_close);
+        mBtCloseGuide.setOnClickListener(v -> {
+            mImgHelp.setVisibility(View.VISIBLE);
+            closePopPopupWindow();
+        });
+    }
+
+    /**
+     * 关闭弹窗
+     */
+    public void closePopPopupWindow() {
+        PopupWindowUtil.closePopPopupWindow();
+    }
+
+    /**
      * 滑动圆盘回调接口
      *
      * @param view
@@ -236,7 +227,6 @@ public class LightDjActivity extends BaseActivity implements ShapeView.AngleCall
      * @param angle
      */
     public void setRouletteBackground(int angle) {
-        mThreaLocal.set(angle);
         //取色器显示时点击获取角度更新灯带颜色
         if (angle >= 0 && angle < BASE_ANGLE) {
             mShapeViewDisk.setBackgroundResource(R.mipmap.pic_cyan);

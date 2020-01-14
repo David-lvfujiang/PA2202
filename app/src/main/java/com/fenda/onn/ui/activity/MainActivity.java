@@ -1,6 +1,5 @@
 package com.fenda.onn.ui.activity;
 
-import android.content.Context;
 import android.content.Intent;
 import android.view.Gravity;
 import android.view.View;
@@ -22,11 +21,8 @@ import butterknife.OnClick;
  * @time 2019/12/26 15:19
  * desc  首页
  */
-public class MainActivity extends BaseMvpActivity implements View.OnClickListener {
-    private final int POPUPWINDOW_WIDTH = 900;
-    private final int POPUPWINDOW_HIGH = -2;
-    private final int POPUPWINDOW_OFFSET = -200;
-    private Context mContext = this;
+public class MainActivity extends BaseMvpActivity {
+
     @BindView(R.id.tvLightDj)
     TextView mTvLightDj;
     @BindView(R.id.tvFm)
@@ -125,8 +121,14 @@ public class MainActivity extends BaseMvpActivity implements View.OnClickListene
         mBtCancel = mRgUpdatePopupWindowLayout.findViewById(R.id.rb_cancel);
         mBtConfirm = mRgUpdatePopupWindowLayout.findViewById(R.id.rb_confirm);
         mEtDeviceName = mRgUpdatePopupWindowLayout.findViewById(R.id.clearWriteEditText);
-        mBtCancel.setOnClickListener(this);
-        mBtConfirm.setOnClickListener(this);
+        mBtCancel.setOnClickListener(v -> {
+            closePopPopupWindow();
+        });
+        mBtConfirm.setOnClickListener(v -> {
+            String newDeviceName = mEtDeviceName.getText().toString().trim();
+            mTvDviceName.setText(newDeviceName);
+            closePopPopupWindow();
+        });
     }
 
     /**
@@ -149,8 +151,22 @@ public class MainActivity extends BaseMvpActivity implements View.OnClickListene
         mTvTwsContent = mTwsPopupWindowLayout.findViewById(R.id.tv_tws_content);
         mTvCancelTws = mTwsPopupWindowLayout.findViewById(R.id.tv_tws_cancel);
         mBtConnectTws = mTwsPopupWindowLayout.findViewById(R.id.bt_tws_connect);
-        mBtConnectTws.setOnClickListener(this);
-        mTvCancelTws.setOnClickListener(this);
+        mBtConnectTws.setOnClickListener(v -> {
+            mBtConnectTws.setEnabled(false);
+            if (isConnectTws) {
+                //关闭tws操作
+                showDeviceSecond(false);
+                isConnectTws = false;
+            } else {
+                //打开tws操作
+                showDeviceSecond(true);
+                isConnectTws = true;
+            }
+            closePopPopupWindow();
+        });
+        mTvCancelTws.setOnClickListener(v -> {
+            closePopPopupWindow();
+        });
         //初始化数据
         if (isConnectTws == false) {
             mTvTwsTitle.setText(R.string.tws_connect_title);
@@ -183,49 +199,13 @@ public class MainActivity extends BaseMvpActivity implements View.OnClickListene
         mResetConnectPopupWindowLayout = View.inflate(mContext, R.layout.layout_device_disconnect_dialog, null);
         mBtResetConnect = mResetConnectPopupWindowLayout.findViewById(R.id.bt_re_connect);
         mTvCancelReset = mResetConnectPopupWindowLayout.findViewById(R.id.tv_cancel);
-        mTvCancelReset.setOnClickListener(this);
-        mBtResetConnect.setOnClickListener(this);
-    }
-
-
-    /**
-     * PopupWindow点击事件处理
-     *
-     * @param v
-     */
-    @Override
-    public void onClick(View v) {
-        switch (v.getId()) {
-            case R.id.bt_tws_connect:
-                mBtConnectTws.setEnabled(false);
-                if (isConnectTws) {
-                    //关闭tws操作
-                    showDeviceSecond(false);
-                    isConnectTws = false;
-                } else {
-                    //打开tws操作
-                    showDeviceSecond(true);
-                    isConnectTws = true;
-                }
-                closePopPopupWindow();
-                break;
-            case R.id.rb_confirm:
-                String newDeviceName = mEtDeviceName.getText().toString().trim();
-                mTvDviceName.setText(newDeviceName);
-                closePopPopupWindow();
-                break;
-            case R.id.bt_re_connect:
-                ToastUtils.show("重连");
-                closePopPopupWindow();
-                break;
-            case R.id.tv_tws_cancel:
-            case R.id.rb_cancel:
-            case R.id.tv_cancel:
-                closePopPopupWindow();
-                break;
-            default:
-                break;
-        }
+        mTvCancelReset.setOnClickListener(v -> {
+            ToastUtils.show("重连");
+            closePopPopupWindow();
+        });
+        mBtResetConnect.setOnClickListener(v -> {
+            closePopPopupWindow();
+        });
     }
 
     /**

@@ -1,5 +1,6 @@
 package com.fenda.onn.ui.activity;
 
+import android.content.Intent;
 import android.view.View;
 import android.widget.CompoundButton;
 
@@ -23,8 +24,9 @@ public class LightModelActivity extends BaseActivity {
     }
 
     @OnClick({R.id.ivBack, R.id.bt_style_one, R.id.bt_style_two, R.id.bt_style_three,
-            R.id.bt_style_four, R.id.bt_style_five})
+            R.id.bt_style_four, R.id.bt_style_five, R.id.bt_light_dj})
     public void handleClickEvent(View view) {
+        Intent intent = new Intent();
         switch (view.getId()) {
             case R.id.ivBack:
                 finish();
@@ -43,6 +45,10 @@ public class LightModelActivity extends BaseActivity {
                 break;
             case R.id.bt_style_five:
                 ToastUtils.show("风格5");
+                break;
+            case R.id.bt_light_dj:
+                intent.setClass(mContext, LightDjActivity.class);
+                startActivity(intent);
                 break;
             default:
                 break;

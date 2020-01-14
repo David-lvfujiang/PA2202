@@ -29,20 +29,20 @@
             android:layout_marginStart="19dp"
             android:fitsSystemWindows="true"
             android:src="@mipmap/icon_back_white"
-            app:layout_constraintBottom_toBottomOf="@+id/ivHelp"
-            app:layout_constraintStart_toStartOf="@+id/ivHead"
-            app:layout_constraintTop_toTopOf="@+id/ivHelp"
-            app:layout_constraintVertical_bias="1.0" />
+            app:layout_constraintBottom_toBottomOf="@+id/tvTitle"
+            app:layout_constraintStart_toStartOf="@+id/ivHead" />
 
         <TextView
             android:id="@+id/tvTitle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginBottom="16dp"
             android:gravity="center"
             android:text="@string/light_dj"
             android:textColor="@color/fd_text_white"
             android:textSize="@dimen/textsize_sp18"
-            app:layout_constraintBottom_toBottomOf="@+id/ivBack"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toBottomOf="@+id/ivHead"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent" />
 
@@ -50,17 +50,14 @@
             android:id="@+id/ivHelp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="48dp"
-            android:layout_marginEnd="16dp"
-            android:layout_marginBottom="17dp"
+            android:layout_marginEnd="19dp"
             android:src="@mipmap/icon_help"
-            app:layout_constraintBottom_toBottomOf="@+id/ivHead"
-            app:layout_constraintEnd_toEndOf="@+id/ivHead"
-            app:layout_constraintTop_toTopOf="@+id/ivHead"
-            app:layout_constraintVertical_bias="0.714" />
+            app:layout_constraintBottom_toBottomOf="@+id/ivBack"
+            app:layout_constraintEnd_toEndOf="@+id/ivHead" />
 
         <com.fenda.onn.ui.view.ShapeView
             android:id="@+id/img_pic_disk"
+            android:visibility="gone"
             android:layout_width="@dimen/demension_dp270"
             android:layout_height="@dimen/demension_dp270"
             android:layout_marginStart="1dp"
@@ -69,8 +66,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.497"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-           />
+            app:layout_constraintTop_toTopOf="parent" />
 
         <com.fenda.onn.ui.view.ShapeView
             android:id="@+id/img_pic_palette"
@@ -81,18 +77,18 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.497"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            />
+            app:layout_constraintTop_toTopOf="parent" />
 
         <ImageView
             android:id="@+id/img_pic_click"
             android:layout_width="@dimen/demension_dp130"
             android:layout_height="@dimen/demension_dp130"
             android:layout_marginTop="90dp"
-            android:src="@mipmap/pic_click"
+            android:background="@drawable/button_press_select"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/ivHead" />
+
 
         <TextView
             android:id="@+id/textView"
@@ -213,100 +209,6 @@
             app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintStart_toEndOf="@+id/bt_miusic_radio"
             app:layout_constraintTop_toTopOf="@+id/bt_miusic_radio"></Button>
-
-        <androidx.constraintlayout.widget.ConstraintLayout
-            android:id="@+id/cl_guide_layout"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:visibility="gone">
-
-            <View
-                android:id="@+id/guide_view"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:alpha="0.5"
-                android:background="@color/fd_text_black"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.0"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"></View>
-
-            <Button
-                android:id="@+id/bt_guide_close"
-                android:layout_width="@dimen/demension_dp30"
-                android:layout_height="@dimen/demension_dp30"
-                android:layout_marginTop="40dp"
-                android:layout_marginEnd="16dp"
-                android:background="@mipmap/icon_guide_cancel"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toTopOf="parent"></Button>
-
-            <Button
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="52dp"
-                android:layout_marginLeft="@dimen/dp_10"
-                android:layout_marginTop="104dp"
-                android:layout_marginRight="@dimen/dp_10"
-                android:background="@mipmap/pic_dialog1"
-                android:gravity="center"
-                android:text="@string/scroll_light"
-                android:textSize="18sp"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"></Button>
-
-            <Button
-                android:id="@+id/button3"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="176dp"
-                android:layout_marginEnd="96dp"
-                android:background="@mipmap/pic_dialog2"
-                android:gravity="center"
-                android:text="@string/click_flash"
-                android:textSize="18sp"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toTopOf="parent"></Button>
-
-            <Button
-                android:id="@+id/button2"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="284dp"
-                android:background="@mipmap/pic_dialog3"
-                android:gravity="center"
-                android:text="@string/select_light_color"
-                android:textSize="18sp"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.304"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"></Button>
-
-            <Button
-                android:id="@+id/button4"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="116dp"
-                android:layout_marginEnd="48dp"
-                android:background="@mipmap/pic_dialog5"
-                android:gravity="center"
-                android:text="@string/open_music_effect_library"
-                android:textSize="18sp"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/button3"></Button>
-
-            <Button
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginEnd="144dp"
-                android:background="@mipmap/pic_dialog5"
-                android:gravity="center"
-                android:text="@string/click_music_effect"
-                android:textSize="18sp"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/button4"></Button>
-
-        </androidx.constraintlayout.widget.ConstraintLayout>
 
         <Button
             android:id="@+id/bt_light_model"

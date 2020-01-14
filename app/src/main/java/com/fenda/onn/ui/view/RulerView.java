@@ -124,6 +124,7 @@ public class RulerView extends View {
     private FmRateUpdateListener fmRateUpdateListener;
     private BodyWeightUpdateListener mBodyWeightUpdateListener;
 
+    //构造代码块，初始化画笔
     {
         mWeightTextPain = new Paint(Paint.ANTI_ALIAS_FLAG);
         mWeightTextPain.setColor(getResources().getColor(R.color.fd_text_3c88d4));
@@ -191,14 +192,21 @@ public class RulerView extends View {
         super(context, attrs, defStyle);
     }
 
+    /**
+     * 事件拦截
+     *
+     * @param event
+     * @return
+     */
     @Override
     public boolean onTouchEvent(MotionEvent event) {
         mGesture.onTouchEvent(event);
         if (event.getAction() == MotionEvent.ACTION_UP) {
             if (mFlingAnim != null && !mFlingAnim.isRunning()) {
-                // startSmoothAnim(revisedTarget(bodyWeight), 100);
+                startSmoothAnim(revisedTarget(bodyWeight), 100);
             }
             if (fmRateUpdateListener != null) {
+                //返回角度
                 fmRateUpdateListener.callbackFmRate(weightStr);
             }
         }
@@ -219,21 +227,16 @@ public class RulerView extends View {
         }
         double f = Double.valueOf(result.trim());
         Log.e("TAG", result);
+        //得到角度
         weightStr = String.format("%.1f", f);
-        int canvasWidth = canvas.getWidth();
-        int centerX = canvasWidth / TWO;
-        int centerY = canvas.getHeight() / THREE;
-
-        //画出当前刻度
-        int textLine = centerY - dp2pix(50);
-        mWeightTextPain.setTextSize(textSizeWeight);
-        mWeightTextPain.setTextAlign(Paint.Align.CENTER);
-        mWeightTextPain.setColor(getResources().getColor(R.color.fd_text_black, null));
         if (fmRateUpdateListener != null) {
+            //返回角度
             fmRateUpdateListener.callbackFmRate(weightStr);
         }
 
-
+        int canvasWidth = canvas.getWidth();
+        int centerX = canvasWidth / TWO;
+        int centerY = canvas.getHeight() / THREE;
         //画刻度基准线
         mWeightTextPain.setColor(getResources().getColor(R.color.fd_text_3c88d4, null));
         mScaleLinePain.setStrokeWidth(lineWidthBase);
@@ -251,7 +254,6 @@ public class RulerView extends View {
             float lineX = centerX;
             float currentHandWeight = bodyWeight;
             drawScaleTable(canvas, centerY, lineX, currentHandWeight);
-            drawScaleBottomTable(canvas, centerX, centerY, lineX, currentHandWeight);
             currentLeftHandWeight = bodyWeight - everyScaleG;
             currentRightHandWeight = bodyWeight + everyScaleG;
             leftLineX = lineX - scaleTableGWidth;
@@ -281,18 +283,40 @@ public class RulerView extends View {
         }
         //画出中间的指针
         canvas.drawLine(centerX, centerY + dp2pix(30), centerX, centerY - lineHeightKg, mWeightTextPain);
-        //绘制遮罩层，用来进行两端透明度的变化
+        //绘制遮罩层，用来实现刻度线俩边遮罩效果
         if (mForegroundPaint == null) {
             initForegroundPaint(canvasWidth);
         }
         canvas.drawRect(0, 450, canvas.getWidth(), canvas.getHeight(), mForegroundPaint);
         canvas.restoreToCount(saved);
+        drawScaleBottomTableShader(canvas, centerX, centerY);
+    }
+
+    private void drawScaleBottomTableShader(Canvas canvas, int centerX, int centerY) {
+        //给画笔设置渐变效果，中间透明
         mRoundRectPait.setShader(new LinearGradient(centerX - dp2pix(100), (lineHeightKg + dp2pix(20)) / 2 + centerY + dp2pix(30),
                 centerX, (lineHeightKg + dp2pix(20)) / 2 + centerY + dp2pix(30), getResources()
                 .getColor(R.color.fd_text_3c88d4), 0X00FFFFFF, Shader.TileMode.MIRROR));
+        //绘制底部的滑动刻度表遮罩矩形
         canvas.drawRoundRect(centerX - dp2pix(100), centerY + dp2pix(30), centerX + dp2pix(100), centerY + lineHeightKg + dp2pix(50), 50, 50, mRoundRectPait);
+        //绘制底部的滑动刻度表的矩形边框
         canvas.drawRoundRect(centerX - dp2pix(100), centerY + dp2pix(30), centerX + dp2pix(100), centerY + lineHeightKg + dp2pix(50),
                 50, 50, mRoundRectBorderPait);
+    }
+
+    /**
+     * 绘制底部的滑动刻度表
+     *
+     * @param canvas
+     * @param centerX
+     * @param centerY
+     * @param lineX
+     * @param currentHandWeight
+     */
+    private void drawScaleBottomTable(Canvas canvas, int centerX, int centerY, float lineX, float currentHandWeight) {
+        if (lineX >= centerX - dp2pix(90) && lineX <= centerX + dp2pix(90)) {
+            canvas.drawLine(lineX, centerY + dp2pix(35), lineX, centerY + lineHeightKg + dp2pix(45), mWeightTextPain);
+        }
     }
 
     @Override
@@ -312,11 +336,6 @@ public class RulerView extends View {
         }
     }
 
-    private void drawScaleBottomTable(Canvas canvas, int centerX, int centerY, float lineX, float currentHandWeight) {
-        if (lineX >= centerX - dp2pix(90) && lineX <= centerX + dp2pix(90)) {
-            canvas.drawLine(lineX, centerY + dp2pix(35), lineX, centerY + lineHeightKg + dp2pix(45), mWeightTextPain);
-        }
-    }
 
     public int getBodyWeight() {
         return bodyWeight;

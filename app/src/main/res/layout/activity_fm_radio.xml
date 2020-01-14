@@ -35,6 +35,7 @@
             android:layout_height="wrap_content"
             android:gravity="center"
             android:text="@string/fm_radio"
+            android:textStyle="bold"
             android:textColor="@color/fd_text_white"
             android:textSize="@dimen/textsize_sp18"
             app:layout_constraintBottom_toBottomOf="@+id/ivBack"

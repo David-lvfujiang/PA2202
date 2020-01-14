@@ -9,7 +9,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginLeft="@dimen/demension_dp19"
-        android:src="@mipmap/icon_back_white"
+        android:src="@mipmap/icon_backblack"
         app:layout_constraintTop_toTopOf="@id/tvTitle"
         app:layout_constraintBottom_toBottomOf="@id/tvTitle"
         app:layout_constraintLeft_toLeftOf="parent"

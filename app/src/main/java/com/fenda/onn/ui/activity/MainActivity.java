@@ -158,6 +158,7 @@ public class MainActivity extends BaseMvpActivity implements View.OnClickListene
             mBtConnectTws.setText(R.string.tws_connect_button);
             mTvCancelTws.setText(R.string.tws_connect_cancel);
         } else {
+
             mTvTwsTitle.setText(R.string.tws_disconnect_title);
             mTvTwsContent.setText(R.string.tws_disconnect_content);
             mBtConnectTws.setText(R.string.tws_disconnect_button);

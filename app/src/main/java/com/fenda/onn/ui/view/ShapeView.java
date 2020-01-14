@@ -2,11 +2,17 @@ package com.fenda.onn.ui.view;
 
 import android.content.Context;
 import android.graphics.Canvas;
+import android.graphics.Color;
 import android.graphics.Paint;
+import android.graphics.Point;
+import android.graphics.RadialGradient;
+import android.graphics.Shader;
 import android.util.AttributeSet;
 import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
+
+import com.fenda.onn.utils.SpotUtil;
 
 /**
  * @Author: david.lvfujiang
@@ -14,17 +20,24 @@ import android.view.View;
  * @Describe: 自定义滚动圆盘View
  */
 public class ShapeView extends View {
-    private final int CIRCLE_CENTER_X = 375;
-    private final int CIRCLE_CENTER_Y = 374;
-    private final int CIRCLE_RADIO = 280;
+    private final int CIRCLE_CENTER_X = 365;
+    private final int CIRCLE_CENTER_Y = 365;
+    private final int CIRCLE_RADIO = 365;
     private final int PAINT_STROKE_WIDTH = 170;
     static ThreadLocal<Integer> threadLocal = new ThreadLocal<Integer>();
     private Paint paint;
     private int centerX, centerY;
+    int dX = 0, dY = 0;
+    int x = 0, y = 0;
+    boolean isShowEffects = false;
     private AngleCallbackListener angleCallbackListener;
 
     public void setAngleCallbackListener(ShapeView.AngleCallbackListener angleCallbackListener) {
         this.angleCallbackListener = angleCallbackListener;
+    }
+
+    public void setShowEffects(boolean showEffects) {
+        isShowEffects = showEffects;
     }
 
     public ShapeView(Context context) {
@@ -52,7 +65,16 @@ public class ShapeView extends View {
     protected void onDraw(Canvas canvas) {
         Log.e("TAG", "onDraw");
         super.onDraw(canvas);
-
+        if (isShowEffects){
+            Paint paint = new Paint();
+            paint.setAlpha(0);
+            paint.setAntiAlias(true);
+            paint.setColor(Color.WHITE);
+            Shader shader = new RadialGradient(x, y, 180, Color.WHITE,
+                    0X00FFFFFF, Shader.TileMode.CLAMP);
+            paint.setShader(shader);
+            canvas.drawCircle(x, y, 180, paint);
+        }
     }
 
     /**
@@ -63,10 +85,9 @@ public class ShapeView extends View {
      */
     @Override
     public boolean onTouchEvent(MotionEvent ev) {
-        int x = (int) ev.getX();
-        int y = (int) ev.getY();
-        int dX = 0;
-        int dY = 0;
+        x = (int) ev.getX();
+        y = (int) ev.getY();
+
         if (x > CIRCLE_CENTER_X) {
             dX = x - CIRCLE_CENTER_X;
         } else {
@@ -81,6 +102,9 @@ public class ShapeView extends View {
         Log.e("TAG", single + "");
         if (angleCallbackListener != null) {
             angleCallbackListener.getAngle(this, single);
+        }
+        if (isShowEffects){
+            invalidate();
         }
         return true;
     }

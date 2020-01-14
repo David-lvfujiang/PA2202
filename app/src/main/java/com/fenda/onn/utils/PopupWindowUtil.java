@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.util.DisplayMetrics;
+import android.view.Gravity;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.PopupWindow;
@@ -66,6 +67,35 @@ public class PopupWindowUtil {
         });
         //设置弹窗位置PopupWindow的相关参数
         mPopupWindow.showAtLocation(context.getWindow().getDecorView(), position, 0, 0);
+    }
+
+    /**
+     * 创建全局的窗口
+     *
+     * @param context PopupWindow显示的载体
+     * @param view    PopupWindow显示的布局
+     * @param isFocus 是否获取焦点
+     */
+    public static void createFullPopupWindow(Activity context, View view, boolean isFocus) {
+        WindowManager.LayoutParams lp = context.getWindow().getAttributes();
+        mPopupWindow = new PopupWindow(view, -1, -1, true);
+        mPopupWindow.setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+        mPopupWindow.setOutsideTouchable(isFocus);
+        mPopupWindow.setFocusable(isFocus);
+        //设置背景为半透明
+        lp.alpha = 0.5f;
+        context.getWindow().setAttributes(lp);
+        //监听PopupWindow关闭时将透明度设置成原来
+        mPopupWindow.setOnDismissListener(new PopupWindow.OnDismissListener() {
+            @Override
+            public void onDismiss() {
+                WindowManager.LayoutParams lp = context.getWindow().getAttributes();
+                lp.alpha = 1f;
+                context.getWindow().setAttributes(lp);
+            }
+        });
+        //设置弹窗位置PopupWindow的相关参数
+        mPopupWindow.showAtLocation(context.getWindow().getDecorView(), Gravity.CENTER, 0, 0);
     }
 
     /**

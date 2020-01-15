@@ -45,7 +45,7 @@ public class FmCollectListFragment extends BaseFragment {
 
     @Override
     protected void initView() {
-        mFmPopupWindowLayout = View.inflate(getActivity(), R.layout.layout_fm_dialog, null);
+        mFmPopupWindowLayout = View.inflate(getActivity(), R.layout.ppw_fm_station_name_layout, null);
         mClearWriteEditText = mFmPopupWindowLayout.findViewById(R.id.clearWriteEditText);
         mBtConfirm = mFmPopupWindowLayout.findViewById(R.id.rb_confirm_update);
         mBtCancel = mFmPopupWindowLayout.findViewById(R.id.rb_cancel_update);

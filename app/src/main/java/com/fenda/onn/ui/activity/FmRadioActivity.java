@@ -34,7 +34,6 @@ import butterknife.OnClick;
  */
 public class FmRadioActivity extends BaseActivity implements RulerView.FmRateUpdateListener {
     private final int MULTIPLE = 1000;
-    private int newFmRate = 0;
     @BindView(R.id.tv_fm_rate)
     TextView mTvFmRate;
     @BindView(R.id.fm_ruler_view)
@@ -49,8 +48,9 @@ public class FmRadioActivity extends BaseActivity implements RulerView.FmRateUpd
     RadioButton mRbCollect;
     @BindView(R.id.fl_Content)
     FrameLayout mFrameLayout;
-    FmSearchListFragment mFmSearchListFragment;
-    FmCollectListFragment mFmCollectListFragment;
+    private int mNewFmRate = 0;
+    private FmSearchListFragment mFmSearchListFragment;
+    private FmCollectListFragment mFmCollectListFragment;
 
     @Override
     public int onBindLayout() {
@@ -79,17 +79,17 @@ public class FmRadioActivity extends BaseActivity implements RulerView.FmRateUpd
         switch (v.getId()) {
             case R.id.bt_fm_icon_next:
                 //获取微调后的数值（旧值+微调频率）
-                newFmRate = (int) ((Float.valueOf(mRulerView.getWeightStr().trim()) + 0.1) * MULTIPLE);
-                Log.e("bodyweight", newFmRate + "");
+                mNewFmRate = (int) ((Float.valueOf(mRulerView.getWeightStr().trim()) + 0.1) * MULTIPLE);
+                Log.e("bodyweight", mNewFmRate + "");
                 //调整刻度尺
-                mRulerView.setBodyWeight(newFmRate);
+                mRulerView.setBodyWeight(mNewFmRate);
                 //播放对应的FM
                 playFm(String.valueOf(Float.valueOf(mRulerView.getWeightStr().trim()) + 0.1));
                 break;
             case R.id.bt_fm_icon_prev:
-                newFmRate = (int) ((Float.valueOf(mRulerView.getWeightStr().trim()) - 0.1) * MULTIPLE);
-                Log.e("bodyweight", newFmRate + "");
-                mRulerView.setBodyWeight(newFmRate);
+                mNewFmRate = (int) ((Float.valueOf(mRulerView.getWeightStr().trim()) - 0.1) * MULTIPLE);
+                Log.e("bodyweight", mNewFmRate + "");
+                mRulerView.setBodyWeight(mNewFmRate);
                 playFm(String.valueOf(Float.valueOf(mRulerView.getWeightStr().trim()) + -0.1));
                 break;
             case R.id.ivBack:

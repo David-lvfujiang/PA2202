@@ -39,7 +39,6 @@ public class EarPhoneFragment extends BaseFragment {
 
     @Override
     protected void initView() {
-
     }
 
     @Override

@@ -37,7 +37,8 @@ public class FmSearchListAdapter extends BaseQuickAdapter<FmStationBean, BaseVie
     protected void convert(BaseViewHolder helper, FmStationBean item) {
 
         //查询收藏列表
-        List<FmStationBean> fmStationBeans = LitePal.where("stationName=?", item.getStationName()).find(FmStationBean.class);
+        List<FmStationBean> fmStationBeans = LitePal.where("stationName=?",
+                item.getStationName()).find(FmStationBean.class);
         if (fmStationBeans.size() > 0) {
             helper.setChecked(R.id.rb_fm_love, true);
         }

@@ -35,7 +35,7 @@ public class ProductionTypeActivity extends BaseActivity {
     ImageView ivBack;
     @BindView(R.id.rvContent)
     RecyclerView rvContent;
-    Button mBtCancel, mBtAgree;
+    private  Button mBtCancel, mBtAgree;
     private List<ProductionTypeBean> mDatas;
     private ProductionTypeAdapter mAdapter;
     private View mPrivacyPolicyPopupWindowLayout;
@@ -80,12 +80,13 @@ public class ProductionTypeActivity extends BaseActivity {
 
     public void createPrivacyPolicyPopupWindow() {
         initPrivacyPolicyPopupWindow();
-        PopupWindowUtil.createPopupWindow(this, mPrivacyPolicyPopupWindowLayout, true, true,
+        PopupWindowUtil.createPopupWindow(this, mPrivacyPolicyPopupWindowLayout,
+                true, true,
                 true, Gravity.CENTER);
     }
 
     public void initPrivacyPolicyPopupWindow() {
-        mPrivacyPolicyPopupWindowLayout = View.inflate(mContext, R.layout.layout_privacy_policy_dialog, null);
+        mPrivacyPolicyPopupWindowLayout = View.inflate(mContext, R.layout.ppw_privacy_policy_layout, null);
         mBtAgree = mPrivacyPolicyPopupWindowLayout.findViewById(R.id.bt_agree);
         mBtCancel = mPrivacyPolicyPopupWindowLayout.findViewById(R.id.bt_cancel);
         mBtAgree.setOnClickListener(v -> {

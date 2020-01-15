@@ -64,7 +64,7 @@ public class AboutDeviceActivity extends BaseActivity {
 
     public void initLanguagePopuWindow() {
         //底部对话框布局
-        mBottomView = View.inflate(mContext, R.layout.layout_device_about_dialog, null);
+        mBottomView = View.inflate(mContext, R.layout.ppw_update_language_layout, null);
         mRgLanguage = mBottomView.findViewById(R.id.rg_language);
         mBtCancel = mBottomView.findViewById(R.id.bt_cancel);
         mBtConfirm = mBottomView.findViewById(R.id.bt_confirm);

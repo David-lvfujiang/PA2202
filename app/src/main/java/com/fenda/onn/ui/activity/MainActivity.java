@@ -50,7 +50,7 @@ public class MainActivity extends BaseMvpActivity {
     private Button mBtConfirm;
     private Button mBtResetConnect;
     private EditText mEtDeviceName;
-    boolean isConnectTws = false;
+    private boolean isConnectTws = false;
 
     @Override
     public int onBindLayout() {
@@ -69,7 +69,8 @@ public class MainActivity extends BaseMvpActivity {
     public void showErrorTip(String msg) {
     }
 
-    @OnClick({R.id.tvLightDj, R.id.tvLightMode, R.id.tvFm, R.id.ivSetting, R.id.ivTws, R.id.ivEdit, R.id.tvAgreement})
+    @OnClick({R.id.tvLightDj, R.id.tvLightMode, R.id.tvFm, R.id.ivSetting,
+            R.id.ivTws, R.id.ivEdit, R.id.tvAgreement})
     public void handleClickEvent(View v) {
         Intent intent = new Intent();
         switch (v.getId()) {
@@ -109,7 +110,8 @@ public class MainActivity extends BaseMvpActivity {
      */
     public void showUpdateDeviceNamePopupWindow() {
         initUpdateDeviceNamePopupWindow();
-        PopupWindowUtil.createPopupWindow(this, mRgUpdatePopupWindowLayout, true, true,
+        PopupWindowUtil.createPopupWindow(this, mRgUpdatePopupWindowLayout,
+                true, true,
                 false, Gravity.CENTER);
     }
 
@@ -117,7 +119,7 @@ public class MainActivity extends BaseMvpActivity {
      * 初始化修改备注PopupWindow相关参数
      */
     public void initUpdateDeviceNamePopupWindow() {
-        mRgUpdatePopupWindowLayout = View.inflate(mContext, R.layout.layout_device_name_dialog, null);
+        mRgUpdatePopupWindowLayout = View.inflate(mContext, R.layout.ppw_update_device_name_layout, null);
         mBtCancel = mRgUpdatePopupWindowLayout.findViewById(R.id.rb_cancel);
         mBtConfirm = mRgUpdatePopupWindowLayout.findViewById(R.id.rb_confirm);
         mEtDeviceName = mRgUpdatePopupWindowLayout.findViewById(R.id.clearWriteEditText);
@@ -137,7 +139,8 @@ public class MainActivity extends BaseMvpActivity {
     public void showTwsPopupWindow() {
         initTwsPopupWindow();
         mBtConnectTws.setEnabled(true);
-        PopupWindowUtil.createPopupWindow(this, mTwsPopupWindowLayout, true, true,
+        PopupWindowUtil.createPopupWindow(this, mTwsPopupWindowLayout,
+                true, true,
                 false, Gravity.CENTER);
     }
 
@@ -146,7 +149,7 @@ public class MainActivity extends BaseMvpActivity {
      */
     public void initTwsPopupWindow() {
         //TWS对话框布局
-        mTwsPopupWindowLayout = View.inflate(mContext, R.layout.layout_device_tws_dialog, null);
+        mTwsPopupWindowLayout = View.inflate(mContext, R.layout.ppw_device_tws_layout, null);
         mTvTwsTitle = mTwsPopupWindowLayout.findViewById(R.id.tv_tws_title);
         mTvTwsContent = mTwsPopupWindowLayout.findViewById(R.id.tv_tws_content);
         mTvCancelTws = mTwsPopupWindowLayout.findViewById(R.id.tv_tws_cancel);
@@ -187,7 +190,8 @@ public class MainActivity extends BaseMvpActivity {
      */
     public void showResetConnectPopupWindow() {
         initResetConnectPopupWindow();
-        PopupWindowUtil.createPopupWindow(this, mResetConnectPopupWindowLayout, false, true,
+        PopupWindowUtil.createPopupWindow(this, mResetConnectPopupWindowLayout,
+                false, true,
                 false, Gravity.CENTER);
     }
 
@@ -196,7 +200,7 @@ public class MainActivity extends BaseMvpActivity {
      */
     public void initResetConnectPopupWindow() {
         //TWS对话框布局
-        mResetConnectPopupWindowLayout = View.inflate(mContext, R.layout.layout_device_disconnect_dialog, null);
+        mResetConnectPopupWindowLayout = View.inflate(mContext, R.layout.ppw_device_disconnect_layout, null);
         mBtResetConnect = mResetConnectPopupWindowLayout.findViewById(R.id.bt_re_connect);
         mTvCancelReset = mResetConnectPopupWindowLayout.findViewById(R.id.tv_cancel);
         mTvCancelReset.setOnClickListener(v -> {

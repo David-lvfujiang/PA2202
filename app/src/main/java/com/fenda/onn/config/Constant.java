@@ -14,5 +14,4 @@ public interface Constant {
     interface Intent{
         String PIC_URL="pic_url";
     }
-
 }

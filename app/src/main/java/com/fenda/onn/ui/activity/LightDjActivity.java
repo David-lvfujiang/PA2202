@@ -1,11 +1,13 @@
 package com.fenda.onn.ui.activity;
 
 import android.content.Intent;
+import android.os.Build;
 import android.view.Gravity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 
+import androidx.annotation.RequiresApi;
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -17,7 +19,6 @@ import com.fenda.onn.ui.adapter.MusicEffectsAdapter;
 import com.fenda.onn.ui.view.ShapeView;
 import com.fenda.onn.utils.LogUtils;
 import com.fenda.onn.utils.PopupWindowUtil;
-import com.fenda.onn.utils.ThreaLocalUtil;
 import com.fenda.onn.utils.ToastUtils;
 
 import java.util.ArrayList;
@@ -72,6 +73,7 @@ public class LightDjActivity extends BaseActivity implements ShapeView.AngleCall
         return R.layout.activity_light_dj;
     }
 
+    @RequiresApi(api = Build.VERSION_CODES.M)
     @Override
     public void initView() {
         mShapeView.setAngleCallbackListener(this);
@@ -179,14 +181,15 @@ public class LightDjActivity extends BaseActivity implements ShapeView.AngleCall
      */
     public void showGuidePopupWindow() {
         initGuidePopupWindow();
-        PopupWindowUtil.createFullPopupWindow(LightDjActivity.this, mGuidePopupWindowLayout, true);
+        PopupWindowUtil.createFullPopupWindow(LightDjActivity.this,
+                mGuidePopupWindowLayout, true);
     }
 
     /**
      * 初始化指导说明界面
      */
     public void initGuidePopupWindow() {
-        mGuidePopupWindowLayout = View.inflate(mContext, R.layout.layout_guide_dialog, null);
+        mGuidePopupWindowLayout = View.inflate(mContext, R.layout.ppw_light_dj_guide_layout, null);
         mBtCloseGuide = mGuidePopupWindowLayout.findViewById(R.id.bt_guide_close);
         mBtCloseGuide.setOnClickListener(v -> {
             mImgHelp.setVisibility(View.VISIBLE);

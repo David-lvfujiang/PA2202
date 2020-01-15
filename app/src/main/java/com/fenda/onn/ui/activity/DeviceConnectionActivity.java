@@ -36,8 +36,8 @@ public class DeviceConnectionActivity extends BaseActivity {
     TextView tvTitle;
     @BindView(R.id.rvContent)
     RecyclerView rvContent;
-    View mConnectPopupWindowLayout;
-    Button mBtCancelConnect;
+    private View mConnectPopupWindowLayout;
+    private Button mBtCancelConnect;
     private List<DeviceConnectionBean> mDatas;
     private DeviceConnectionAdapter mAdapter;
     private PopupWindow mPopupWindow;
@@ -100,7 +100,7 @@ public class DeviceConnectionActivity extends BaseActivity {
      * 初始化连接对话框
      */
     public void initConnectPopupWindow() {
-        mConnectPopupWindowLayout = View.inflate(mContext, R.layout.layout_connect_dialog, null);
+        mConnectPopupWindowLayout = View.inflate(mContext, R.layout.ppw_connect_device_layout, null);
         mBtCancelConnect = mConnectPopupWindowLayout.findViewById(R.id.bt_connect);
         PopupWindowUtil.createPopupWindow(this, mConnectPopupWindowLayout, true, true,
                 false, Gravity.CENTER);

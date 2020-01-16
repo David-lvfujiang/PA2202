@@ -269,12 +269,12 @@ public class RulerView extends View {
             //从中开始向左画指针
             if (currentLeftHandWeight >= minWeight) {
                 drawScaleTable(canvas, centerY, leftLineX, currentLeftHandWeight);
-                drawScaleBottomTable(canvas, centerX, centerY, leftLineX + 300, currentLeftHandWeight);
+                drawScaleBottomTable(canvas, centerX, centerY, leftLineX + dp2pix(100), currentLeftHandWeight);
             }
             //从中开始向右画指针
             if (currentRightHandWeight <= maxWeight) {
                 drawScaleTable(canvas, centerY, rightLineX, currentRightHandWeight);
-                drawScaleBottomTable(canvas, centerX, centerY, rightLineX - 300, currentRightHandWeight);
+                drawScaleBottomTable(canvas, centerX, centerY, rightLineX - dp2pix(100), currentRightHandWeight);
             }
             currentLeftHandWeight -= everyScaleG;
             currentRightHandWeight += everyScaleG;
@@ -287,7 +287,7 @@ public class RulerView extends View {
         if (mForegroundPaint == null) {
             initForegroundPaint(canvasWidth);
         }
-        canvas.drawRect(0, 450, canvas.getWidth(), canvas.getHeight(), mForegroundPaint);
+        canvas.drawRect(0, dp2pix(150), canvas.getWidth(), canvas.getHeight(), mForegroundPaint);
         canvas.restoreToCount(saved);
         drawScaleBottomTableShader(canvas, centerX, centerY);
     }
@@ -298,9 +298,11 @@ public class RulerView extends View {
                 centerX, (lineHeightKg + dp2pix(20)) / 2 + centerY + dp2pix(30), getResources()
                 .getColor(R.color.fd_text_3c88d4), 0X00FFFFFF, Shader.TileMode.MIRROR));
         //绘制底部的滑动刻度表遮罩矩形
-        canvas.drawRoundRect(centerX - dp2pix(100), centerY + dp2pix(30), centerX + dp2pix(100), centerY + lineHeightKg + dp2pix(50), 50, 50, mRoundRectPait);
+        canvas.drawRoundRect(centerX - dp2pix(100), centerY + dp2pix(30),
+                centerX + dp2pix(100), centerY + lineHeightKg + dp2pix(50), 50, 50, mRoundRectPait);
         //绘制底部的滑动刻度表的矩形边框
-        canvas.drawRoundRect(centerX - dp2pix(100), centerY + dp2pix(30), centerX + dp2pix(100), centerY + lineHeightKg + dp2pix(50),
+        canvas.drawRoundRect(centerX - dp2pix(100), centerY + dp2pix(30),
+                centerX + dp2pix(100), centerY + lineHeightKg + dp2pix(50),
                 50, 50, mRoundRectBorderPait);
     }
 
@@ -315,7 +317,8 @@ public class RulerView extends View {
      */
     private void drawScaleBottomTable(Canvas canvas, int centerX, int centerY, float lineX, float currentHandWeight) {
         if (lineX >= centerX - dp2pix(90) && lineX <= centerX + dp2pix(90)) {
-            canvas.drawLine(lineX, centerY + dp2pix(35), lineX, centerY + lineHeightKg + dp2pix(45), mWeightTextPain);
+            canvas.drawLine(lineX, centerY + dp2pix(35), lineX,
+                    centerY + lineHeightKg + dp2pix(45), mWeightTextPain);
         }
     }
 
@@ -329,7 +332,8 @@ public class RulerView extends View {
         if (currentHandWeight % ONE_KG == 0) {
             mScaleLinePain.setStrokeWidth(lineWidthKg);
             canvas.drawLine(lineX, centerY, lineX, centerY - lineHeightKg, mScaleLinePain);
-            canvas.drawText(String.valueOf(currentHandWeight / ONE_KG), lineX, centerY + dp2pix(20), mScaleWeightTextPain);
+            canvas.drawText(String.valueOf(currentHandWeight / ONE_KG), lineX,
+                    centerY + dp2pix(20), mScaleWeightTextPain);
         } else {
             mScaleLinePain.setStrokeWidth(lineWidthG);
             canvas.drawLine(lineX, centerY, lineX, centerY - lineHeightG, mScaleLinePain);
@@ -375,7 +379,8 @@ public class RulerView extends View {
             mFlingAnim.cancel();
             mFlingAnim = null;
         }
-        mFlingAnim = ObjectAnimator.ofInt(RulerView.this, "bodyWeight", this.bodyWeight, targetWeight);
+        mFlingAnim = ObjectAnimator.ofInt(RulerView.this,
+                "bodyWeight", this.bodyWeight, targetWeight);
         mFlingAnim.setInterpolator(mLinearOutSlowInInterpolator);
         mFlingAnim.setDuration(duration);
         mFlingAnim.addUpdateListener(mFlingAnimUpdateListener);
@@ -416,7 +421,8 @@ public class RulerView extends View {
     }
 
     private int dp2pix(int dp) {
-        return (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, dp, Resources.getSystem().getDisplayMetrics());
+        return (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, dp,
+                Resources.getSystem().getDisplayMetrics());
     }
 
     private int sp2pix(int dp) {

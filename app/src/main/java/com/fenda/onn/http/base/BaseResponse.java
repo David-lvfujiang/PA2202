@@ -1,69 +1,31 @@
 package com.fenda.onn.http.base;
-/**
-*@author kevin.wangzhiqiang
-*@time 2019/12/26 15:17
-*desc  响应基类
-*/
-public class BaseResponse<T> {
 
+/**
+ * Date : 2020/3/4
+ * Author : Davaid.lvfujiang
+ * Desc :
+ */
+public class BaseResponse<T>  {
     private int code;
     private String message;
-    private long timestamp;
-    private String requestId;
-    private int handleTime;
     private T data;
 
     public int getCode() {
         return code;
     }
-
-    public void setCode(int code) {
-        this.code = code;
-    }
-
     public String getMessage() {
         return message;
-    }
-
-    public void setMessage(String message) {
-        this.message = message;
-    }
-
-    public long getTimestamp() {
-        return timestamp;
-    }
-
-    public void setTimestamp(long timestamp) {
-        this.timestamp = timestamp;
-    }
-
-    public String getRequestId() {
-        return requestId;
-    }
-
-    public void setRequestId(String requestId) {
-        this.requestId = requestId;
-    }
-
-    public int getHandleTime() {
-        return handleTime;
-    }
-
-    public void setHandleTime(int handleTime) {
-        this.handleTime = handleTime;
     }
 
     public T getData() {
         return data;
     }
 
-    public void setData(T data) {
-        this.data = data;
-    }
-
-    public static class CodeBean {
-    }
-
-    public static class DataBean {
+    @Override public String toString() {
+        return "BaseResponse{" +
+                "code=" + code +
+                ", message='" + message + '\'' +
+                ", data=" + data +
+                '}';
     }
 }

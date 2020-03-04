@@ -22,7 +22,7 @@ import butterknife.Unbinder;
 
 
 /**
- * @author kevin.wangzhiqiang
+ * @author David-lvfujiang
  * @time 2019/12/26
  * desc 基类Fragment
  */

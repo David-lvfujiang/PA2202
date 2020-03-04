@@ -1,6 +1,5 @@
 package com.fenda.onn.common.base;
 
-import android.app.Application;
 import android.content.Context;
 import android.content.Intent;
 import android.content.res.Configuration;
@@ -9,10 +8,10 @@ import android.view.View;
 import android.view.ViewStub;
 import android.view.Window;
 import android.view.WindowManager;
-
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
-
+import butterknife.ButterKnife;
+import butterknife.Unbinder;
 import com.fenda.onn.AppApplication;
 import com.fenda.onn.R;
 import com.fenda.onn.common.view.LoadingInitView;
@@ -20,23 +19,17 @@ import com.fenda.onn.common.view.NetErrorView;
 import com.fenda.onn.common.view.NoDataView;
 import com.fenda.onn.utils.AppManager;
 import com.fenda.onn.utils.NetUtil;
-import com.fenda.onn.utils.ScreenFitUtil;
 import com.fenda.onn.utils.StatusBarUtil;
-
-import butterknife.ButterKnife;
-import butterknife.Unbinder;
-
+import org.greenrobot.eventbus.EventBus;
 
 /**
- * @author kevin.wangzhiqiang
+ * @author David-lvfujiang
  * @time 2019/12/26 15:13
  * desc 基类Activity
  */
 public abstract class BaseActivity extends AppCompatActivity {
 
-
     protected Context mContext;
-
     protected NetErrorView mNetErrorView;
     protected NoDataView mNoDataView;
     protected LoadingInitView mLoadingInitView;
@@ -49,6 +42,7 @@ public abstract class BaseActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
+        EventBus.getDefault().register(this);
         super.onCreate(savedInstanceState);
         getWindow().requestFeature(Window.FEATURE_CONTENT_TRANSITIONS);
         boolean isFull = initStatusBar();
@@ -63,7 +57,7 @@ public abstract class BaseActivity extends AppCompatActivity {
             NoTitleFullScreen();
         }
         mContext = this;
-//        ScreenFitUtil.setCustomDensity(this, (Application) AppApplication.getContext());
+        //        ScreenFitUtil.setCustomDensity(this, (Application) AppApplication.getContext());
         initCommonView();
         //初始化butterknife
         mUnBinder = ButterKnife.bind(this);
@@ -72,10 +66,7 @@ public abstract class BaseActivity extends AppCompatActivity {
         initData();
         initListener();
         AppManager.getAppManager().addActivity(this);
-
-
     }
-
 
     public boolean initStatusBar() {
         return false;
@@ -85,7 +76,6 @@ public abstract class BaseActivity extends AppCompatActivity {
     public boolean isToolbarImmersion() {
         return false;
     }
-
 
     /**
      * 关闭页面，如果需要在关闭页面时做特殊处理
@@ -104,7 +94,6 @@ public abstract class BaseActivity extends AppCompatActivity {
                 WindowManager.LayoutParams.FLAG_FULLSCREEN);
     }
 
-
     protected void initCommonView() {
         mViewContent = findViewById(R.id.view_stub_content);
         mViewInitLoading = findViewById(R.id.view_stub_init_loading);
@@ -114,14 +103,12 @@ public abstract class BaseActivity extends AppCompatActivity {
         mViewContent.inflate();
     }
 
-
     /**
      * 通过Class跳转界面
      **/
     public void startActivity(Class<?> cls) {
         startActivity(cls, null);
     }
-
 
     /**
      * 通过Class跳转界面
@@ -134,7 +121,7 @@ public abstract class BaseActivity extends AppCompatActivity {
      * 含有Bundle通过Class跳转界面
      **/
     public void startActivityForResult(Class<?> cls, Bundle bundle,
-                                       int requestCode) {
+            int requestCode) {
         Intent intent = new Intent();
         intent.setClass(this, cls);
         if (bundle != null) {
@@ -142,7 +129,6 @@ public abstract class BaseActivity extends AppCompatActivity {
         }
         startActivityForResult(intent, requestCode);
     }
-
 
     /**
      * 含有Bundle通过Class跳转界面
@@ -156,14 +142,12 @@ public abstract class BaseActivity extends AppCompatActivity {
         startActivity(intent);
     }
 
-
     public abstract int onBindLayout();
 
     public abstract void initView();
 
     protected void init() {
     }
-
 
     protected void initData() {
 
@@ -193,13 +177,12 @@ public abstract class BaseActivity extends AppCompatActivity {
     }
 
     public void hideNetWorkErrView() {
-//        showNetWorkErrView(false);
+                showNetWorkErrView(false);
     }
 
     public void showNetWorkErrView() {
-//        showNetWorkErrView(true);
+                showNetWorkErrView(true);
     }
-
 
     private void showInitLoadView(boolean show) {
         if (mLoadingInitView == null) {
@@ -208,7 +191,6 @@ public abstract class BaseActivity extends AppCompatActivity {
         }
         mLoadingInitView.setVisibility(show ? View.VISIBLE : View.GONE);
     }
-
 
     private void showNetWorkErrView(boolean show) {
         if (mNetErrorView == null) {
@@ -240,7 +222,6 @@ public abstract class BaseActivity extends AppCompatActivity {
         if (mViewContent != null) {
             mViewContent.setVisibility(show ? View.VISIBLE : View.GONE);
         }
-
     }
 
     private void showNoDataView(boolean show, int resid) {
@@ -257,7 +238,6 @@ public abstract class BaseActivity extends AppCompatActivity {
         isConfigChange = true;
     }
 
-
     @Override
     protected void onDestroy() {
         super.onDestroy();
@@ -268,5 +248,6 @@ public abstract class BaseActivity extends AppCompatActivity {
         if (mUnBinder != null) {
             mUnBinder.unbind();
         }
+        EventBus.getDefault().unregister(this);
     }
 }

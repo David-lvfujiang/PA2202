@@ -1,15 +1,12 @@
 package com.fenda.onn;
 
 import android.app.Activity;
-import android.app.Application;
 import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
-
-import org.litepal.LitePalApplication;
-import org.litepal.tablemanager.Connector;
-
 import java.util.ArrayList;
 import java.util.List;
+import org.litepal.LitePalApplication;
+import org.litepal.tablemanager.Connector;
 
 /**
  * @author kevin.wangzhiqiang
@@ -26,10 +23,10 @@ public class AppApplication extends LitePalApplication {
         mContext = this;
         SQLiteDatabase db = Connector.getDatabase();
     }
+
     public static Context getContext() {
         return mContext;
     }
-
 
     /**
      * 向List中添加一个活动
@@ -39,11 +36,8 @@ public class AppApplication extends LitePalApplication {
 
     public static void addActivity(Activity activity) {
 
-
         mActivitys.add(activity);
-
     }
-
 
     /**
      * 从List中移除活动
@@ -53,11 +47,8 @@ public class AppApplication extends LitePalApplication {
 
     public static void removeActivity(Activity activity) {
 
-
         mActivitys.remove(activity);
-
     }
-
 
     /**
      * 将List中存储的活动全部销毁掉
@@ -65,18 +56,12 @@ public class AppApplication extends LitePalApplication {
 
     public static void finishAll() {
 
-
         for (Activity activity : mActivitys) {
-
 
             if (!activity.isFinishing()) {
 
-
                 activity.finish();
-
             }
-
         }
-
     }
 }

@@ -1,4 +1,4 @@
-package com.fenda.onn.mvp.base;
+package com.fenda.onn.common.base;
 
 
 /**

@@ -1,6 +1,5 @@
 package com.fenda.onn.http;
 
-
 import android.content.Context;
 import android.content.pm.PackageManager;
 import android.util.Log;
@@ -40,7 +39,7 @@ import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory;
 import retrofit2.converter.gson.GsonConverterFactory;
 
 /**
- * @author kevin.wangzhiqiang
+ * @author David-lvfujiang
  * @time 2019/12/26 15:18
  * desc  Retrofit辅助类
  */
@@ -107,7 +106,6 @@ public class RetrofitHelper {
         return okHttpClient;
     }
 
-
     private class AddSignInterceptor implements Interceptor {
 
         @Override
@@ -125,7 +123,6 @@ public class RetrofitHelper {
 
                 allArgsTreeMap.put(nameList.get(i), request.url().queryParameterValues(nameList.get(i)).get(0));
             }
-
 
             if (request.body() instanceof FormBody) {
                 FormBody formBody = (FormBody) request.body();
@@ -187,7 +184,6 @@ public class RetrofitHelper {
             return chain.proceed(request);
         }
     }
-
 
     public String md5Decode(String content) {
         byte[] hash;
@@ -256,6 +252,7 @@ public class RetrofitHelper {
             return response;
         }
     }
+
     /**
      * 获取版本号名称
      *
@@ -287,7 +284,6 @@ public class RetrofitHelper {
             return "did not work";
         }
     }
-
 
     public <T> T getServer(Class<T> service) {
         return mRetrofit.create(service);

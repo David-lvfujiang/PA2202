@@ -1,6 +1,8 @@
 package com.fenda.onn.ui.activity;
 
 import android.util.Log;
+import android.widget.TextView;
+import butterknife.BindView;
 import com.fenda.onn.R;
 import com.fenda.onn.bean.WeatherBean;
 import com.fenda.onn.common.base.BaseMvpActivity;
@@ -10,9 +12,11 @@ import org.greenrobot.eventbus.Subscribe;
 import org.greenrobot.eventbus.ThreadMode;
 
 public class MainActivity extends BaseMvpActivity<MainPresenter> implements MainContract.IMainView {
+    @BindView(R.id.tv_weather)
+    TextView mTvWeather;
 
     @Override public int onBindLayout() {
-        return R.layout.activity_main2;
+        return R.layout.activity_main;
     }
 
     @Override public void initView() {
@@ -26,8 +30,14 @@ public class MainActivity extends BaseMvpActivity<MainPresenter> implements Main
     @Override public void showErrorTip(String msg) {
     }
 
+    /**
+     * 接收后台参数
+     *
+     * @param weatherBean
+     */
     @Subscribe(threadMode = ThreadMode.MAIN)
-    public void message(WeatherBean bean){
-        Log.e("TAG",bean.getWeatherinfo().toString());
+    public void handleWeatherMessage(WeatherBean weatherBean) {
+        Log.e("TAG", weatherBean.getWeatherinfo().toString());
+        mTvWeather.setText(weatherBean.getWeatherinfo().toString());
     }
 }

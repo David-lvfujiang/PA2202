@@ -3,7 +3,7 @@ package com.fenda.onn.bean;
 /**
  * Date : 2020/3/4
  * Author : Davaid.lvfujiang
- * Desc :
+ * Desc : 天气实体类
  */
 public class WeatherBean {
 

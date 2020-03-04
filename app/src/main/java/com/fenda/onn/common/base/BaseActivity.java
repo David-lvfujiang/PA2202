@@ -186,6 +186,7 @@ public abstract class BaseActivity extends AppCompatActivity {
 
     private void showInitLoadView(boolean show) {
         if (mLoadingInitView == null) {
+            //inflate只能调用一次
             View view = mViewInitLoading.inflate();
             mLoadingInitView = view.findViewById(R.id.view_init_loading);
         }

@@ -1,7 +1,6 @@
 package com.fenda.onn.http;
 
 import com.fenda.onn.bean.WeatherBean;
-import com.fenda.onn.http.base.BaseResponse;
 import io.reactivex.Observable;
 import retrofit2.http.GET;
 import retrofit2.http.Path;
@@ -13,5 +12,5 @@ import retrofit2.http.Path;
  */
 public interface ApiService {
     @GET("data/sk/{cityId}.html")
-    Observable<BaseResponse<WeatherBean>> getWeatherInfo(@Path("cityId") String cityId);
+    Observable<WeatherBean> getWeatherInfo(@Path("cityId") String cityId);
 }

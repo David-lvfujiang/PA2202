@@ -7,13 +7,13 @@ import com.fenda.onn.contract.MainContract;
 import com.fenda.onn.http.ApiService;
 import com.fenda.onn.http.RetrofitHelper;
 import com.fenda.onn.http.base.BaseObserver;
-import com.fenda.onn.http.base.BaseResponse;
 import com.fenda.onn.http.exception.RetrofitException;
 import com.fenda.onn.utils.ToastUtils;
 import io.reactivex.Observable;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.Disposable;
 import io.reactivex.schedulers.Schedulers;
+import org.greenrobot.eventbus.EventBus;
 
 /**
  * Date : 2020/3/4
@@ -24,22 +24,19 @@ public class MainPresenter extends BaseMvpPresenter<MainContract.IMainView> impl
     @Override public void processWeather() {
         RetrofitHelper retrofitHelper = RetrofitHelper.getInstance(Constant.Sevice.SEVICE_URL);
         ApiService service = retrofitHelper.getServer(ApiService.class);
-        Observable<BaseResponse<WeatherBean>> observable = service.getWeatherInfo("101010100");
-        mViewRef.get().showLoading("正在加载");
+        Observable<WeatherBean> observable = service.getWeatherInfo("101010100");
         observable.subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(new BaseObserver<BaseResponse<WeatherBean>>() {
+                .subscribe(new BaseObserver<WeatherBean>() {
                     @Override
                     public void onSubscribe(Disposable d) {
+                        mViewRef.get().showLoading("正在加载");
                     }
 
-                    @Override public void onNext(BaseResponse<WeatherBean> weatherBeanBaseResponse) {
-                        if (weatherBeanBaseResponse.getCode() == 200) {
-                            ToastUtils.show("请求成功");
-                            mViewRef.get().hideLoading();
-                        } else {
-                            ToastUtils.show(weatherBeanBaseResponse.getMessage());
-                        }
+                    @Override public void onNext(WeatherBean weatherBeanBaseResponse) {
+                        System.out.println(weatherBeanBaseResponse.getWeatherinfo().toString());
+                        mViewRef.get().hideLoading();
+                        EventBus.getDefault().post(weatherBeanBaseResponse);
                     }
 
                     @Override
@@ -51,10 +48,10 @@ public class MainPresenter extends BaseMvpPresenter<MainContract.IMainView> impl
                         mViewRef.get().hideLoading();
                         switch (responeThrowable.code) {
                             case RetrofitException.ERROR.UNKNOWN:
-                                mViewRef.get().showErrorTip("未知错误");
+                                ToastUtils.show("未知错误");
                                 break;
                             case RetrofitException.ERROR.PARSE_ERROR:
-                                ToastUtils.show("解析错误");
+                                mViewRef.get().showNetError();
                                 break;
                             case RetrofitException.ERROR.NETWORD_ERROR:
                                 mViewRef.get().showNetError();

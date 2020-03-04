@@ -53,7 +53,7 @@ public class RetrofitException {
                 || e instanceof SocketTimeoutException
                 || e instanceof UnknownHostException) {
             ex = new ResponeThrowable(e, ERROR.NETWORD_ERROR);
-            ex.message = "连接失败";
+            ex.message = "请求失败";
             return ex;
         } else if (e instanceof SSLHandshakeException) {
             ex = new ResponeThrowable(e, ERROR.SSL_ERROR);

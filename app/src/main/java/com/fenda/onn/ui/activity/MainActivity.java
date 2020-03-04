@@ -1,6 +1,5 @@
 package com.fenda.onn.ui.activity;
 
-import android.util.Log;
 import android.widget.TextView;
 import butterknife.BindView;
 import com.fenda.onn.R;
@@ -30,6 +29,8 @@ public class MainActivity extends BaseMvpActivity<MainPresenter> implements Main
     @Override public void showErrorTip(String msg) {
     }
 
+
+
     /**
      * 接收后台参数
      *
@@ -37,7 +38,6 @@ public class MainActivity extends BaseMvpActivity<MainPresenter> implements Main
      */
     @Subscribe(threadMode = ThreadMode.MAIN)
     public void handleWeatherMessage(WeatherBean weatherBean) {
-        Log.e("TAG", weatherBean.getWeatherinfo().toString());
         mTvWeather.setText(weatherBean.getWeatherinfo().toString());
     }
 }

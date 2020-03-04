@@ -34,9 +34,11 @@ public class MainPresenter extends BaseMvpPresenter<MainContract.IMainView> impl
                     }
 
                     @Override public void onNext(WeatherBean weatherBeanBaseResponse) {
-                        System.out.println(weatherBeanBaseResponse.getWeatherinfo().toString());
-                        mViewRef.get().hideLoading();
-                        EventBus.getDefault().post(weatherBeanBaseResponse);
+                        if (weatherBeanBaseResponse != null) {
+                            mViewRef.get().hideLoading();
+                            EventBus.getDefault().post(weatherBeanBaseResponse);
+                        } else {
+                        }
                     }
 
                     @Override
